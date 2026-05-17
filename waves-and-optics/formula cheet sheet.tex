@@ -1,0 +1,172 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{physics}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\title{Waves and Optics Formula Cheat Sheet}
+\author{University Level}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Basic Wave Equations}
+\subsection{General Wave Equation}
+The standard form of the wave equation is:
+\begin{equation}
+    \nabla^2 \psi(\mathbf{r}, t) - \frac{1}{c^2} \frac{\partial^2 \psi(\mathbf{r}, t)}{\partial t^2} = 0,
+\end{equation}
+where \(\psi(\mathbf{r}, t)\) is the wave function and \(c\) is the wave speed.
+
+\subsection{Plane Wave Solutions}
+A common solution is the plane wave:
+\begin{equation}
+    \psi(x,t) = A e^{i(kx - \omega t)},
+\end{equation}
+with amplitude \(A\), wavenumber \(k\), and angular frequency \(\omega\) (where \( \omega = c k \) for non-dispersive media).
+
+\section{Wave Parameter Conversions}
+The following relationships are essential for converting between various wave parameters:
+\begin{itemize}[leftmargin=*, label={--}]
+    \item \textbf{Angular Frequency and Frequency:}
+    \begin{equation}
+        \omega = 2\pi f,
+    \end{equation}
+    where \(f\) is the frequency in hertz (Hz).
+    
+    \item \textbf{Frequency and Period:}
+    \begin{equation}
+        f = \frac{1}{T},
+    \end{equation}
+    where \(T\) is the period.
+    
+    \item \textbf{Wavenumber and Wavelength:}
+    \begin{equation}
+        k = \frac{2\pi}{\lambda},
+    \end{equation}
+    where \(\lambda\) is the wavelength.
+    
+    \item \textbf{Wave Speed Relation:}
+    \begin{equation}
+        c = \lambda f = \frac{\omega}{k}.
+    \end{equation}
+\end{itemize}
+
+\section{Fourier Transforms}
+The Fourier transform \( \mathcal{F}\{f(t)\}(\omega) \) and its inverse are defined as:
+\begin{align}
+    \mathcal{F}\{f(t)\}(\omega) &= \int_{-\infty}^{\infty} f(t)e^{-i\omega t}dt, \\
+    f(t) &= \frac{1}{2\pi}\int_{-\infty}^{\infty} \mathcal{F}\{f(t)\}(\omega)e^{i\omega t}d\omega.
+\end{align}
+
+\subsection{Common Functions}
+\begin{itemize}[leftmargin=*, label={--}]
+    \item \textbf{Dirac Delta Function}:
+    \begin{align}
+        \mathcal{F}\{\delta(t)\}(\omega) &= 1.
+    \end{align}
+    
+    \item \textbf{Rectangular Function} (often written as \(\operatorname{rect}\)):
+    \begin{align}
+        \operatorname{rect}\left(\frac{t}{T}\right) =
+        \begin{cases}
+            1, & |t| < \frac{T}{2}, \\
+            \frac{1}{2}, & |t| = \frac{T}{2}, \\
+            0, & |t| > \frac{T}{2}.
+        \end{cases}
+    \end{align}
+    Its Fourier transform is:
+    \begin{align}
+        \mathcal{F}\left\{\operatorname{rect}\left(\frac{t}{T}\right)\right\}(\omega)
+        &= T\, \operatorname{sinc}\left(\frac{\omega T}{2\pi}\right),
+    \end{align}
+    where \(\operatorname{sinc}(x) = \frac{\sin(\pi x)}{\pi x}\).
+
+    \item \textbf{Gaussian Function}:
+    \begin{align}
+        f(t) &= e^{-at^2}, \quad a>0,
+    \end{align}
+    has the Fourier transform:
+    \begin{align}
+        \mathcal{F}\{e^{-at^2}\}(\omega)
+        &= \sqrt{\frac{\pi}{a}}\, e^{-\frac{\omega^2}{4a}}.
+    \end{align}
+\end{itemize}
+
+\section{Complex Numbers and the Complex Wave Function}
+\subsection{Fundamental Properties}
+\begin{itemize}[leftmargin=*, label={--}]
+    \item \textbf{Euler's Formula:}
+    \begin{equation}
+        e^{i\theta} = \cos\theta + i\sin\theta.
+    \end{equation}
+    \item \textbf{Complex Conjugate:} For \(z = a + ib\), the conjugate is \(z^* = a - ib\).
+    \item \textbf{Modulus:} The magnitude of \(z\) is given by
+    \begin{equation}
+        |z| = \sqrt{a^2+b^2}.
+    \end{equation}
+\end{itemize}
+
+\subsection{Complex Wave Function}
+In quantum mechanics and optics, waves are often represented as complex functions. A typical form is:
+\begin{equation}
+    \psi(x,t) = A e^{i(kx - \omega t)},
+\end{equation}
+where:
+\begin{itemize}[leftmargin=*, label={--}]
+    \item \(A\) is the amplitude,
+    \item \(k\) is the wave number,
+    \item \(\omega\) is the angular frequency.
+\end{itemize}
+The measurable \emph{intensity} or \emph{probability density} is:
+\begin{equation}
+    |\psi(x,t)|^2 = \psi(x,t)\psi^*(x,t),
+\end{equation}
+and for normalized functions, the condition is:
+\begin{equation}
+    \int_{-\infty}^{\infty} |\psi(x,t)|^2\, dx = 1.
+\end{equation}
+
+\section{Optics Essentials}
+\subsection{Lens Equation}
+The thin lens equation is given by:
+\begin{equation}
+    \frac{1}{f} = \frac{1}{d_o} + \frac{1}{d_i},
+\end{equation}
+where \(f\) is the focal length, \(d_o\) is the object distance, and \(d_i\) is the image distance.
+
+\subsection{Huygens-Fresnel Principle}
+Every point on a wavefront acts as a source of secondary spherical wavelets. The superposition of these wavelets forms the next wavefront. This principle is central to understanding diffraction and interference.
+
+\subsection{Diffraction and Interference}
+For example, the \textbf{Fraunhofer diffraction} pattern for a single slit of width \(a\) is:
+\begin{equation}
+    I(\theta) \propto \left( \frac{\sin(\beta)}{\beta} \right)^2, \quad \beta = \frac{\pi a \sin\theta}{\lambda},
+\end{equation}
+where \(\lambda\) is the wavelength of light.
+
+\section{Additional Notes}
+\begin{itemize}[leftmargin=*, label={--}]
+    \item \textbf{Superposition Principle:} Linear wave equations allow the addition of solutions, which underlies interference patterns.
+    \item \textbf{Dispersion Relation:} Relates \(\omega\) and \(k\) in media where wave speed depends on frequency.
+    \item \textbf{Phase and Group Velocity:}
+    \begin{align}
+        v_p &= \frac{\omega}{k}, \\
+        v_g &= \frac{d\omega}{dk}.
+    \end{align}
+\end{itemize}
+
+\section{References and Further Reading}
+For a deeper dive into these topics, consider reviewing textbooks on waves and optics, such as:
+\begin{itemize}[leftmargin=*, label={--}]
+    \item "Introduction to Electrodynamics" by David J. Griffiths,
+    \item "Principles of Optics" by Born and Wolf,
+    \item Standard texts on Fourier analysis.
+\end{itemize}
+
+\end{document}

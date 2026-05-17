@@ -1,0 +1,63 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, graphicx, physics, siunitx}
+\usepackage{geometry}
+\geometry{margin=1in}
+\title{Summary of Key Topics in Waves and Optics}
+\author{University-Level Study Guide}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section{Wave Properties and Relationships}
+Waves are characterized by several interrelated properties:
+\begin{itemize}
+    \item \textbf{Wavelength} ($\lambda$): The distance over which the wave's shape repeats.
+    \item \textbf{Wave number} ($k$): Defined as $k = \frac{2\pi}{\lambda}$, representing the spatial frequency.
+    \item \textbf{Frequency} ($f$): The number of oscillations per second.
+    \item \textbf{Angular frequency} ($\omega$): Defined as $\omega = 2\pi f$.
+    \item \textbf{Wave speed} ($c$): The speed at which the wave propagates, given by $c = \lambda f$ or $c = \frac{\omega}{k}$.
+\end{itemize}
+\textbf{Example:} For a wave described by $\psi(x,t) = A \cos(kx - \omega t)$, we have $\lambda = \frac{2\pi}{k}$, $f = \frac{\omega}{2\pi}$, and $c = \frac{\omega}{k}$.
+
+\section{Complex Numbers and Oscillations}
+\subsection{Euler's Identity and Wave Representation}
+Euler's identity states:
+\[ e^{i\theta} = \cos\theta + i\sin\theta. \]
+This is used to represent waves as:
+\[ \psi(x,t) = A e^{i(kx - \omega t)}. \]
+The physical wave is obtained by taking the real part:
+\[ \Re(\psi(x,t)) = A \cos(kx - \omega t). \]
+\subsection{Complex Conjugate}
+The complex conjugate of $\psi(x,t)$ is $\psi^*(x,t) = A e^{-i(kx - \omega t)}$. The product $\psi(x,t) \psi^*(x,t)$ gives the wave intensity.
+
+\section{Fourier Transform}
+The Fourier Transform (FT) decomposes a function into its frequency components:
+\[ \hat{f}(k) = \int_{-\infty}^{\infty} f(x) e^{-ikx} \dd{x}. \]
+The inverse transform is given by:
+\[ f(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \hat{f}(k) e^{ikx} \dd{k}. \]
+\subsection{Fourier Transform of a Gaussian}
+For $f(x) = e^{-x^2}$, the FT is:
+\[ \hat{f}(k) = \sqrt{\pi} e^{-\frac{k^2}{4}}. \]
+\textbf{Derivation:} Using $\int_{-\infty}^{\infty} e^{-ax^2} \dd{x} = \sqrt{\frac{\pi}{a}}$ for $a > 0$.
+\subsection{Convolution Theorem}
+The convolution $g*h$ is given by:
+\[ (g*h)(x) = \int_{-\infty}^{\infty} g(x')h(x-x') \dd{x'}. \]
+In the Fourier domain:
+\[ \mathcal{F}(g*h) = \mathcal{F}(g) \cdot \mathcal{F}(h). \]
+
+\section{Dispersion}
+Dispersion describes the dependence of wave speed on frequency. The dispersion relation is:
+\[ \omega = \omega(k). \]
+\textbf{Example:} For light in a medium, $c = \frac{c_0}{n(\lambda)}$, where $n(\lambda)$ is the refractive index.
+
+\section{Group Velocity and Phase Velocity}
+\textbf{Phase Velocity:} The speed of the wave's phase:
+\[ v_p = \frac{\omega}{k}. \]
+\textbf{Group Velocity:} The speed of the wave packet:
+\[ v_g = \frac{d\omega}{dk}. \]
+\textbf{Example:} For $\omega = c_0 k$, $v_p = v_g = c_0$. In dispersive media, $v_g \neq v_p$.
+
+\section*{Conclusion}
+This document provides a concise summary of key concepts in waves and optics. These principles form the foundation for understanding complex wave phenomena in various physical systems.
+
+\end{document}

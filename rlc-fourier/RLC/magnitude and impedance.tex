@@ -1,0 +1,196 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+
+\title{Comprehensive Analysis of RLC Circuits}
+\author{}
+\date{}
+\maketitle
+
+\section*{Introduction}
+This document provides a comprehensive analysis of RLC circuits. We derive and analyze solutions for both the homogeneous and driven cases using Fourier transforms and other methods. Additionally, we address specific questions related to the behavior of the RLC circuit under various driving conditions and explore extensions involving non-ideal components.
+
+\section*{Circuit Description}
+Consider a series RLC circuit with a voltage source \(V(t)\) applied across it. The components of the circuit are:
+\begin{itemize}
+    \item Resistor: \(R\),
+    \item Inductor: \(L\),
+    \item Capacitor: \(C\).
+\end{itemize}
+
+The current through the circuit is denoted by \(I(t)\). The behavior of the circuit depends on the interplay of resistance, inductance, capacitance, and the driving voltage.
+
+\section*{Governing Equation}
+Using Kirchhoff's Voltage Law (KVL):
+\[
+L \frac{d^2q}{dt^2} + R \frac{dq}{dt} + \frac{q}{C} = V(t).
+\]
+Substituting \(I(t) = \frac{dq}{dt}\):
+\[
+L \frac{dI}{dt} + R I + \frac{1}{C} \int I \, dt = V(t).
+\]
+This is a second-order linear differential equation governing the dynamics of the circuit.
+
+\section*{Impedance and Magnitude of \(I(t)\)}
+The impedance \(Z(\omega)\) of the circuit is the frequency-domain representation of the relationship between the voltage and current:
+\[
+Z(\omega) = R + i\omega L - \frac{i}{\omega C}.
+\]
+The magnitude of the impedance is:
+\[
+|Z(\omega)| = \sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}.
+\]
+The current \(I(t)\) is given by the voltage divided by the impedance. For a sinusoidal voltage \(V(t) = V_0 \sin(\omega t)\), the steady-state current in the frequency domain is:
+\[
+I(\omega) = \frac{V_0}{Z(\omega)}.
+\]
+The magnitude of the current is:
+\[
+|I(\omega)| = \frac{V_0}{|Z(\omega)|} = \frac{V_0}{\sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}}.
+\]
+The phase shift \(\phi\) is determined by:
+\[
+\phi = \tan^{-1}\left(\frac{\omega L - \frac{1}{\omega C}}{R}\right).
+\]
+In the time domain, the steady-state current is:
+\[
+I(t) = \frac{V_0}{\sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}} \cos(\omega t + \phi).
+\]
+
+\section*{Homogeneous Solution}
+For the homogeneous case (\(V(t) = 0\)):
+\[
+L \frac{d^2I}{dt^2} + R \frac{dI}{dt} + \frac{1}{C} I = 0.
+\]
+The characteristic equation is:
+\[
+L\lambda^2 + R\lambda + \frac{1}{C} = 0.
+\]
+The roots of the characteristic equation are:
+\[
+\lambda = \frac{-R \pm \sqrt{R^2 - 4\frac{L}{C}}}{2L}.
+\]
+The nature of the roots depends on the discriminant \(\Delta = R^2 - 4\frac{L}{C}\):
+\begin{itemize}
+    \item \(\Delta > 0\) (Overdamped): The roots \(\lambda_1\) and \(\lambda_2\) are real and distinct. The current decays as:
+    \[
+    I(t) = A e^{\lambda_1 t} + B e^{\lambda_2 t},
+    \]
+    where \(\lambda_1, \lambda_2 < 0\). This represents a non-oscillatory decay of current due to high resistance relative to the reactive components.
+    \item \(\Delta = 0\) (Critically Damped): The roots are real and equal: \(\lambda = -\frac{R}{2L}\). The current decays as:
+    \[
+    I(t) = (A + Bt)e^{\lambda t},
+    \]
+    where \(A\) and \(B\) are constants. This condition corresponds to the fastest decay to equilibrium without oscillations.
+    \item \(\Delta < 0\) (Underdamped): The roots are complex conjugates: \(\lambda = -\alpha \pm i\omega_d\), where:
+    \[
+    \alpha = \frac{R}{2L}, \quad \omega_d = \sqrt{\frac{1}{LC} - \frac{R^2}{4L^2}}.
+    \]
+    The current oscillates while decaying exponentially:
+    \[
+    I(t) = e^{-\alpha t} \left(A \cos(\omega_d t) + B \sin(\omega_d t)\right).
+    \]
+    The oscillation frequency \(\omega_d\) is lower than the natural frequency \(\omega_0 = \sqrt{\frac{1}{LC}}\) due to damping.
+\end{itemize}
+The discriminant \(\Delta\) is critical for predicting whether the system exhibits oscillatory behavior, critical damping, or overdamped decay.
+
+\section*{Fourier Transform Solution for Non-Homogeneous Case}
+For a driven circuit with \(V(t) = V_0 e^{i\omega t}\), the governing equation is:
+\[
+L \frac{d^2I}{dt^2} + R \frac{dI}{dt} + \frac{1}{C} I = V_0 e^{i\omega t}.
+\]
+Taking the Fourier transform of the entire equation:
+\[
+\mathcal{F}\left[L \frac{d^2I}{dt^2} + R \frac{dI}{dt} + \frac{1}{C} I \right] = \mathcal{F}[V(t)].
+\]
+Using the linearity and derivative properties of the Fourier transform:
+\begin{itemize}
+    \item \(\mathcal{F}\left[\frac{d^2I}{dt^2}\right] = -\omega^2 \hat{I}(\omega),\)
+    \item \(\mathcal{F}\left[\frac{dI}{dt}\right] = i\omega \hat{I}(\omega),\)
+    \item \(\mathcal{F}[I(t)] = \hat{I}(\omega).\)
+\end{itemize}
+Substituting these into the equation:
+\[
+\left(-L\omega^2 + i\omega R + \frac{1}{C}\right) \hat{I}(\omega) = \hat{V}(\omega).
+\]
+The Fourier transform of the current is:
+\[
+\hat{I}(\omega) = \frac{\hat{V}(\omega)}{R + i\omega L - \frac{i}{\omega C}}.
+\]
+For a sinusoidal driving voltage \(V(t) = V_0 e^{i\omega t}\), \(\hat{V}(\omega) = V_0 \delta(\omega - \omega_0)\), and:
+\[
+\hat{I}(\omega) = \frac{V_0 \delta(\omega - \omega_0)}{R + i\omega L - \frac{i}{\omega C}}.
+\]
+The inverse Fourier transform gives the time-domain solution:
+\[
+I(t) = \mathcal{F}^{-1}[\hat{I}(\omega)].
+\]
+Using the properties of the delta function, the steady-state solution is:
+\[
+I(t) = \frac{V_0}{\sqrt{R^2 + \left(\omega_0 L - \frac{1}{\omega_0 C}\right)^2}} e^{i(\omega_0 t - \phi)},
+\]
+where the phase shift \(\phi\) is:
+\[
+\phi = \tan^{-1}\left(\frac{\omega_0 L - \frac{1}{\omega_0 C}}{R}\right).
+\]
+The magnitude of the current reflects the frequency response of the circuit, which is governed by the impedance \(Z(\omega)\).
+
+\section*{Specific Questions and Answers}
+\subsection*{1. RLC with a driven AC current \(V(t) = \sin(\omega t)\): Solution in short and long times}
+\begin{itemize}
+    \item \(t \to 0\): The transient solution dominates, and the behavior depends on the initial conditions and homogeneous solution. The response includes exponential terms that decay over time.
+    \item \(t \to \infty\): The steady-state solution dominates, given by:
+    \[
+    I(t) = \frac{1}{\sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}} \cos(\omega t + \phi),
+    \]
+    where \(\phi\) is the phase shift.
+\end{itemize}
+
+\subsection*{2. Resonant Frequency and Identification}
+The resonant frequency is:
+\[
+\omega_r = \frac{1}{\sqrt{LC}}.
+\]
+We can identify resonance in two ways:
+\begin{enumerate}
+    \item The imaginary part of the impedance \(Z(\omega)\) becomes zero: \(\omega L = \frac{1}{\omega C}\).
+    \item The current \(I(t)\) reaches its maximum value, as the impedance \(Z(\omega)\) is minimized.
+\end{enumerate}
+
+\subsection*{3. Effect of Amplitude \(A\) on \(V(t) = A \sin(\omega t)\)}
+The current scales proportionally with \(A\):
+\[
+I(t) = \frac{A}{\sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}} \cos(\omega t + \phi).
+\]
+
+\subsection*{4. Driven Voltage \(V(t) = \sin(\omega t) + \sin(2\omega t)\)}
+\begin{itemize}
+    \item \(t \to 0\): Transient effects dominate, influenced by initial conditions.
+    \item \(t \to \infty\): The steady-state solution is the superposition of responses to \(\sin(\omega t)\) and \(\sin(2\omega t)\):
+    \[
+    I(t) = \frac{1}{\sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}} \cos(\omega t + \phi_1) + \frac{1}{\sqrt{R^2 + \left(2\omega L - \frac{1}{2\omega C}\right)^2}} \cos(2\omega t + \phi_2).
+    \]
+\end{itemize}
+
+\subsection*{5. General Driven Current \(V(t) = f(t)\): Long-Time Behavior}
+At \(t \to \infty\), the solution is determined by the steady-state response to the dominant frequency components of \(f(t)\). Using Fourier analysis, the current is:
+\[
+I(t) = \sum_{\omega} \frac{\hat{f}(\omega)}{\sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}} \cos(\omega t + \phi(\omega)).
+\]
+
+\subsection*{6. Non-Ideal Capacitor with \(V(q) = \frac{q}{C} + \alpha q^2\)}
+\begin{itemize}
+    \item The quadratic term introduces nonlinearity, altering the governing equations.
+    \item Resonance conditions and steady-state solutions may change due to the dependence of the capacitor's voltage on \(q^2\).
+    \item If \(\alpha\) is small compared to \(rac{1}{C}\), perturbation methods can approximate the solution as:
+    \[
+    I(t) = I_0(t) + \alpha I_1(t),
+    \]
+    where \(I_0(t)\) is the linear solution, and \(I_1(t)\) represents nonlinear corrections.
+\end{itemize}
+
+\section*{Conclusion}
+This document presents an in-depth analysis of RLC circuits, addressing homogeneous and driven solutions. The role of the discriminant in determining the behavior of the homogeneous solution and the use of Fourier transforms for non-homogeneous cases are elaborated. Questions related to resonance, driven forces, and non-ideal capacitors are discussed to provide a comprehensive understanding.
+
+\end{document}

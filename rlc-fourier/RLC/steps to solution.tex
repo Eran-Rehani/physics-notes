@@ -1,0 +1,175 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{bm}
+
+\begin{document}
+
+\section*{Solution of the Series RLC Circuit (Homogeneous and Driven AC) Using Fourier Transform}
+
+\noindent \textbf{Circuit Setup:} 
+Consider a series RLC circuit with resistor $R$, inductor $L$, capacitor $C$, and a voltage source $V(t)$. Let $q(t)$ be the charge on the capacitor and $i(t) = \frac{dq}{dt}$ the current. The governing differential equation from Kirchhoff's Voltage Law (KVL) is:
+\[
+L \frac{d^2 q(t)}{dt^2} \;+\; R \frac{d q(t)}{dt} \;+\; \frac{1}{C} \, q(t) \;=\; V(t).
+\]
+
+\vspace{1em}
+\section*{1. Homogeneous (Natural) Solution}
+
+\noindent \textbf{Homogeneous ODE:} Set $V(t) = 0$:
+\[
+L \frac{d^2 q_h(t)}{dt^2} \;+\; R \frac{d q_h(t)}{dt} \;+\; \frac{1}{C} \, q_h(t) \;=\; 0.
+\]
+
+\noindent Assume a solution of the form $q_h(t) = A e^{s t}$. Plugging this in gives the characteristic equation:
+\[
+L s^2 + R s + \frac{1}{C} = 0.
+\]
+Solving for $s$:
+\[
+s \;=\; \frac{-R \pm \sqrt{R^2 - 4\,\frac{L}{C}}}{2L}.
+\]
+Denote the discriminant $\Delta = R^2 - 4\frac{L}{C}$. The general homogeneous solution is:
+
+\[
+q_h(t) = 
+\begin{cases}
+A_1 e^{s_1 t} + A_2 e^{s_2 t}, & \Delta > 0 \quad (\text{overdamped}), \\[1em]
+(A_1 + A_2\,t)\,e^{-\frac{R}{2L}t}, & \Delta = 0 \quad (\text{critically damped}), \\[1em]
+e^{-\frac{R}{2L}t}\Big[B_1 \cos(\omega_d t) + B_2 \sin(\omega_d t)\Big], & \Delta < 0 \quad (\text{underdamped}),
+\end{cases}
+\]
+where 
+\[
+\omega_d = \frac{1}{\sqrt{LC}}\sqrt{1 - \frac{R^2\,C}{4L}}.
+\]
+
+\noindent In compact form:
+\[
+q_h(t) = C_1 e^{s_1 t} + C_2 e^{s_2 t} \quad \text{with} \quad s_{1,2} = \frac{-R \pm \sqrt{R^2 - 4L/C}}{2L}.
+\]
+
+\vspace{1em}
+\section*{2. Driven (Forced) AC Solution via Fourier Transform}
+
+\noindent Let the driving voltage be a sinusoid,
+\[
+V(t) = V_0 \cos(\omega t).
+\]
+We want the \textit{particular} (steady-state) solution $q_p(t)$ to the inhomogeneous equation:
+\[
+L \frac{d^2 q(t)}{dt^2} + R \frac{d q(t)}{dt} + \frac{1}{C} q(t) = V_0 \cos(\omega t).
+\]
+
+\subsection*{2.1. Applying the Fourier Transform}
+
+\noindent Denote the Fourier transform by $\mathcal{F}\{ \cdot \}$. If $\hat{q}(\Omega)$ is the transform of $q(t)$, then using properties of the Fourier transform:
+
+\[
+\mathcal{F}\left\{ \frac{d^2 q}{dt^2} \right\}(\Omega) = -( \Omega^2 ) \,\hat{q}(\Omega), 
+\quad
+\mathcal{F}\left\{ \frac{d q}{dt} \right\}(\Omega) = i\,\Omega \,\hat{q}(\Omega).
+\]
+
+\noindent Transforming the RLC equation:
+\[
+L\bigl(-\Omega^2 \hat{q}(\Omega)\bigr) \;+\; R \bigl(i\Omega \hat{q}(\Omega)\bigr) \;+\; \frac{1}{C} \,\hat{q}(\Omega) 
+\;=\; \mathcal{F}\{V_0 \cos(\omega t)\}(\Omega).
+\]
+But 
+\[
+\mathcal{F}\{\cos(\omega t)\}(\Omega) = \pi \bigl[\delta(\Omega - \omega) + \delta(\Omega + \omega)\bigr].
+\]
+So
+\[
+\left(-L \Omega^2 + iR\Omega + \frac{1}{C}\right)\hat{q}(\Omega) 
+\;=\; V_0\,\pi \,\bigl[\delta(\Omega - \omega) + \delta(\Omega + \omega)\bigr].
+\]
+
+\noindent Hence,
+\[
+\hat{q}(\Omega) = \frac{V_0\,\pi\,[\delta(\Omega - \omega) + \delta(\Omega + \omega)]}{-L \Omega^2 + iR\Omega + \tfrac{1}{C}}.
+\]
+
+\subsection*{2.2. Inverse Transform and Particular Solution}
+
+\noindent The steady-state solution (particular solution) at frequency $\omega$ emerges from the terms at $\Omega = \pm \omega$. Equivalently, one can guess a phasor solution:
+\[
+q_p(t) = \Re\Big\{ Q(\omega)\, e^{j \omega t} \Big\}, 
+\]
+which satisfies
+\[
+\bigl(-\omega^2 L + j\omega R + \tfrac{1}{C}\bigr)\,Q(\omega)\,e^{j\omega t} = V_0\,e^{j\omega t}.
+\]
+Thus the complex amplitude is
+\[
+Q(\omega) = \frac{V_0}{-\,\omega^2\,L + j\,\omega\,R + \tfrac{1}{C}}.
+\]
+The real form of the particular solution is then
+\[
+q_p(t) = \Re\left\{ \frac{V_0 \, e^{j\omega t}}{-\omega^2 L + j\,\omega R + \tfrac{1}{C}} \right\}.
+\]
+Sometimes it's more convenient to find the \textit{current} $i_p(t) = \frac{d q_p}{dt}$:
+\[
+i_p(t) = \Re\left\{ j\,\omega \,\frac{V_0 \, e^{j\omega t}}{-\omega^2 L + j\,\omega R + \tfrac{1}{C}} \right\}.
+\]
+
+\vspace{1em}
+\section*{3. Total Solution}
+
+\noindent The \textbf{complete} solution is the sum of the homogeneous (transient) solution and the particular (steady-state) solution:
+\[
+q(t) = q_h(t) + q_p(t).
+\]
+
+\vspace{1em}
+\section*{4. Steady-State (AC) Algebraic Form}
+
+\noindent Often, one focuses on the sinusoidal steady-state \textit{current} $i_p(t)$. For a \textit{series} RLC driven by $V_0 \cos(\omega t)$, the steady-state current amplitude is:
+\[
+I(\omega) = \frac{V_0}{\sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}}.
+\]
+Phase shift $\phi$ satisfies:
+\[
+\tan(\phi) = \frac{R\,\omega}{\tfrac{1}{C} - \omega^2 L}.
+\]
+If you specifically want \textit{charge} amplitude $Q(\omega)$,
+\[
+Q(\omega) = \frac{I(\omega)}{\omega} \;=\; \frac{V_0 / \omega}{\sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}}.
+\]
+The real-time steady-state charge is then:
+\[
+q_p(t) = \frac{V_0}{\sqrt{\Big(\omega L - \frac{1}{\omega C}\Big)^2 + R^2}}\;\cos(\omega t - \phi).
+\]
+
+\vspace{1em}
+\section*{5. Tips to Avoid Mistakes}
+\begin{itemize}
+\item \textbf{Sign Conventions:} Make sure the differential equation $L\,\tfrac{d^2 q}{dt^2} + R\,\tfrac{d q}{dt} + \tfrac{1}{C} q(t) = V(t)$ is correct with the proper signs.
+\item \textbf{Characteristic Equation:} Carefully solve $L s^2 + R s + \tfrac{1}{C} = 0$ and note the discriminant $\Delta = R^2 - 4L/C$.
+\item \textbf{Fourier vs.\ Phasors:} Both yield the same steady-state solution; just two different methods.
+\item \textbf{Initial Conditions vs.\ Steady-State:} The homogeneous solution handles transients and depends on initial $q(0)$, $i(0)$. The particular solution describes the long-term sinusoidal behavior.
+\item \textbf{Units and Damping Regimes:} Keep track of unit consistency. Check overdamped, critically damped, or underdamped regimes by the discriminant $\Delta$.
+\end{itemize}
+
+\vspace{1em}
+\section*{6. Summary}
+
+\noindent \textbf{Homogeneous solution (zero input):}
+\[
+q_h(t) = C_1 e^{s_1 t} + C_2 e^{s_2 t}, \quad \text{where } s_{1,2} = \frac{-R \pm \sqrt{R^2 - 4L/C}}{2L}.
+\]
+
+\noindent \textbf{Particular solution (steady-state sinusoidal drive):}
+\[
+q_p(t) = \Re\!\left\{\frac{V_0\, e^{j\omega t}}{-\,\omega^2\,L + j\,\omega\,R + \tfrac{1}{C}}\right\}.
+\]
+
+\noindent \textbf{Combined total solution:}
+\[
+q(t) = q_h(t) + q_p(t).
+\]
+
+\noindent This approach (via Fourier transform or phasors) provides a comprehensive way to handle both transient (natural) response and forced (driven) AC response in an RLC circuit.
+
+\end{document}

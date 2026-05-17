@@ -1,0 +1,34 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath}
+\usepackage[margin=0.7in]{geometry}
+\begin{document}
+\section*{Fourier Transform Solution for the 1D Wave Equation}
+Given the wave equation
+\[
+\psi_{tt} = c^2\, \psi_{xx}, \quad \psi(x,0)=f(x), \quad \psi_t(x,0)=g(x),
+\]
+define \(\omega = c|k|\). The steps are:
+
+\begin{enumerate}
+  \item \textbf{Fourier Transform:} Define
+    \[
+    \hat{\psi}(k,t)=\int_{-\infty}^\infty \psi(x,t)e^{-ikx}\,dx.
+    \]
+    The PDE becomes an ODE:
+    \[
+    \hat{\psi}_{tt}(k,t) + \omega^2\,\hat{\psi}(k,t)=0.
+    \]
+  \item \textbf{Solve the ODE:} With initial data
+    \[
+    \hat{f}(k)=\int_{-\infty}^\infty f(x)e^{-ikx}\,dx, \quad \hat{g}(k)=\int_{-\infty}^\infty g(x)e^{-ikx}\,dx,
+    \]
+    the solution is
+    \[
+    \hat{\psi}(k,t)=\hat{f}(k)\cos(\omega t)+\frac{\hat{g}(k)}{\omega}\sin(\omega t).
+    \]
+  \item \textbf{Inverse Fourier Transform:} Recover the solution in physical space:
+    \[
+    \psi(x,t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}\left[\hat{f}(k)\cos(\omega t)+\frac{\hat{g}(k)}{\omega}\sin(\omega t)\right]e^{ikx}\,dk.
+    \]
+\end{enumerate}
+\end{document}

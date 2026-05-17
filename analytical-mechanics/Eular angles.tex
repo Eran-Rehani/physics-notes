@@ -1,0 +1,143 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\title{Rotation Matrices with Euler Angles}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Euler angles define the orientation of a rigid body using three consecutive rotations about different coordinate axes. A common convention is the ZYX sequence, involving:
+\begin{itemize}
+    \item Yaw ($R_z(\alpha)$): Rotation around the $z$-axis.
+    \item Pitch ($R_y(\beta)$): Rotation around the $y$-axis.
+    \item Roll ($R_x(\gamma)$): Rotation around the $x$-axis.
+\end{itemize}
+
+\section{Rotation Matrices}
+Each individual rotation matrix is given by:
+
+\subsection{Rotation About the $x$-Axis (Roll)}
+\begin{equation}
+R_x(\gamma) =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos\gamma & -\sin\gamma \\
+0 & \sin\gamma & \cos\gamma
+\end{bmatrix}
+\end{equation}
+
+\subsection{Rotation About the $y$-Axis (Pitch)}
+\begin{equation}
+R_y(\beta) =
+\begin{bmatrix}
+\cos\beta & 0 & \sin\beta \\
+0 & 1 & 0 \\
+-\sin\beta & 0 & \cos\beta
+\end{bmatrix}
+\end{equation}
+
+\subsection{Rotation About the $z$-Axis (Yaw)}
+\begin{equation}
+R_z(\alpha) =
+\begin{bmatrix}
+\cos\alpha & -\sin\alpha & 0 \\
+\sin\alpha & \cos\alpha & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\end{equation}
+
+\section{Combined Rotation Matrix (ZYX Sequence)}
+The total rotation matrix is given by:
+\begin{equation}
+R(\alpha, \beta, \gamma) = R_z(\alpha) R_y(\beta) R_x(\gamma)
+\end{equation}
+Expanding this product:
+\begin{equation}
+R(\alpha, \beta, \gamma) =
+\begin{bmatrix}
+\cos\alpha \cos\beta & \cos\alpha \sin\beta \sin\gamma - \sin\alpha \cos\gamma & \cos\alpha \sin\beta \cos\gamma + \sin\alpha \sin\gamma \\
+\sin\alpha \cos\beta & \sin\alpha \sin\beta \sin\gamma + \cos\alpha \cos\gamma & \sin\alpha \sin\beta \cos\gamma - \cos\alpha \sin\gamma \\
+-\sin\beta & \cos\beta \sin\gamma & \cos\beta \cos\gamma
+\end{bmatrix}
+\end{equation}
+\section{Rotational Velocity Matrix}
+The angular velocity vector $\boldsymbol{\omega}$ in terms of Euler angles is given by:
+\begin{equation}
+\boldsymbol{\omega} = 
+\begin{bmatrix}
+\dot{\alpha} \\
+0 \\
+0
+\end{bmatrix} + R_x(\gamma)^T 
+\begin{bmatrix}
+0 \\
+\dot{\beta} \\
+0
+\end{bmatrix} + R_x(\gamma)^T R_y(\beta)^T 
+\begin{bmatrix}
+0 \\
+0 \\
+\dot{\gamma}
+\end{bmatrix}
+\end{equation}
+Expanding this, the rotational velocity matrix $\Omega$ is:
+\begin{equation}
+\Omega = 
+\begin{bmatrix}
+1 & 0 & -\sin\beta \\
+0 & \cos\gamma & \cos\beta \sin\gamma \\
+0 & -\sin\gamma & \cos\beta \cos\gamma
+\end{bmatrix}
+\begin{bmatrix}
+\dot{\alpha} \\
+\dot{\beta} \\
+\dot{\gamma}
+\end{bmatrix}
+\end{equation}
+\mathbf{\Omega} =
+\begin{pmatrix}
+\omega_1 \\
+\omega_2 \\
+\omega_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+\dot{\phi} \sin\theta \sin\psi + \dot{\theta} \cos\psi \\
+\dot{\phi} \sin\theta \cos\psi + \dot{\theta} \sin\psi \\
+\dot{\psi} + \dot{\phi} \cos\theta
+\end{pmatrix}
+
+\text{סוגרי פואסון} 
+
+\{f,g\}_{pq} := \sum \left( \frac{\partial f}{\partial p_i} \frac{\partial g}{\partial q_i} - \frac{\partial f}{\partial q_i} \frac{\partial g}{\partial p_i} \right)
+
+\{f,g\} = -\{g,f\} , \quad \{a f + b g, h\} = a \{f,h\} + b \{g,h\}
+
+\{q_i, q_j\} = \{p_i, p_j\} = 0, \quad \{p_i, q_j\} = \delta_{ij}
+
+\{a b, c\} = a \{b,c\} + b \{a,c\}
+
+\{f, \{g,h\}\} + \{g, \{h,f\}\} + \{h, \{f,g\}\} = 0
+
+\{f(u), g(v)\} = \{u,v\} \frac{\partial f}{\partial u} \frac{\partial g}{\partial v}
+
+\{f(\vec{p}), g(\vec{q})\} = \sum \frac{\partial f}{\partial p_i} \frac{\partial g}{\partial q_i}
+
+\{f(\vec{q}, \vec{p}), q_i\} = \frac{\partial f}{\partial p_i}, \quad \{ f(\vec{q}, \vec{p}), p_i\} = -\frac{\partial f}{\partial q_i}
+
+\{L_i, L_j\} = -\sum_k \epsilon_{ijk} L_k
+
+\section{Applications}
+Euler angles are widely used in physics and engineering, including:
+\begin{itemize}
+    \item Aerospace: Aircraft orientation (pitch, yaw, roll).
+    \item Robotics: Positioning robotic arms.
+    \item Computer Graphics: 3D object rotation.
+    \item Quantum Mechanics: Spin transformations.
+\end{itemize}
+
+\end{document}

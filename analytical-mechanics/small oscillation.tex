@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+
+\title{Key Equations and Solution Steps for Small Oscillations}
+\author{}
+\date{}
+\maketitle
+
+\section{Lagrangian for Small Oscillations}
+The system is described by the Lagrangian:
+\begin{equation}
+L = T - V
+\end{equation}
+where \( T \) is the kinetic energy and \( V \) is the potential energy. For small oscillations around equilibrium, we define new coordinates:
+\begin{equation}
+q_i = \tilde{q}_i - q_{0i}, \quad \dot{q}_i = \dot{\tilde{q}}_i
+\end{equation}
+Expanding \( L \) to second order:
+\begin{equation}
+L \approx \frac{1}{2} \sum_{i,j} M_{ij} \dot{q}_i \dot{q}_j - \frac{1}{2} \sum_{i,j} K_{ij} q_i q_j
+\end{equation}
+where:
+\begin{equation*}
+M_{ij} = \frac{\partial^2 L}{\partial \dot{q}_i \partial \dot{q}_j} \Big|_{q = q_0, \dot{q} = 0}, \quad
+K_{ij} = -\frac{\partial^2 L}{\partial q_i \partial q_j} \Big|_{q = q_0, \dot{q} = 0}
+\end{equation*}
+
+\section{Equations of Motion}
+The equations of motion are given by:
+\begin{equation}
+M_{ij} \ddot{q}_j + K_{ij} q_j = 0
+\end{equation}
+
+\section{Normal Modes and Eigenfrequencies}
+We assume a solution of the form:
+\begin{equation}
+q_i(t) = \bar{q}_i e^{i\omega t}
+\end{equation}
+which leads to the eigenvalue equation:
+\begin{equation}
+(K - \omega^2 M) \bar{q} = 0
+\end{equation}
+which has solutions when:
+\begin{equation}
+\det(K - \omega^2 M) = 0
+\end{equation}
+The general solution is:
+\begin{equation}
+q_i(t) = \sum_\ell (\bar{q}^{(\ell)})_i A_\ell \cos(\omega_\ell t + \phi_\ell)
+\end{equation}
+
+\section{Example: Two Coupled Masses on Perpendicular Tracks}
+The **mass matrix**:
+\begin{equation}
+M = \begin{bmatrix} m & 0 \\ 0 & 2m \end{bmatrix}
+\end{equation}
+
+The **stiffness matrix**:
+\begin{equation}
+K = \begin{bmatrix} k & -k \cos\alpha \\ -k \cos\alpha & k \end{bmatrix}
+\end{equation}
+
+Solving for eigenfrequencies:
+\begin{equation}
+\omega^2_{\pm} = \frac{k}{4m} \left(3 \pm \sqrt{9 - 8 \sin^2 \alpha} \right)
+\end{equation}
+
+The **normal mode eigenvectors**:
+\begin{equation}
+\bar{q}_\pm = \begin{bmatrix} \cos\alpha \\ \frac{1}{4} (1 \mp \sqrt{9 - 8 \sin^2 \alpha}) \end{bmatrix}
+\end{equation}
+
+\section{Example: CO$_2$ Molecule Vibrations}
+For a CO$_2$ molecule modeled as three masses connected by springs, the **mass matrix** is:
+\begin{equation}
+M = \begin{bmatrix} m & 0 & 0 \\ 0 & M & 0 \\ 0 & 0 & m \end{bmatrix}
+\end{equation}
+
+The **stiffness matrix**:
+\begin{equation}
+K = \begin{bmatrix} k & -k & 0 \\ -k & 2k & -k \\ 0 & -k & k \end{bmatrix}
+\end{equation}
+
+Solving \( \det(K - \omega^2 M) = 0 \), the eigenfrequencies are:
+\begin{equation}
+\omega_0 = 0, \quad \omega_+ = \sqrt{\frac{k}{m} \left(1 + \frac{2m}{M} \right)}, \quad \omega_- = \sqrt{\frac{k}{m}}
+\end{equation}
+
+\section{Example: Small Oscillations in a Power-Law Potential}
+A mass \( m \) interacts with two fixed particles at \( x = \pm l \), governed by a potential:
+\begin{equation}
+V(r) = V_0 \left(\frac{r}{l}\right)^\alpha
+\end{equation}
+Expanding around equilibrium \( x = 0, y = 0 \), we find the eigenfrequencies:
+\begin{equation}
+\omega_1^2 = \frac{2V_0\alpha(\alpha - 1)}{ml^2}, \quad \omega_2^2 = \frac{2V_0\alpha}{ml^2}
+\end{equation}
+
+Stability conditions:
+- **Stable in \( y \)-direction** for all \( \alpha > 0 \).
+- **Stable in \( x \)-direction** if \( \alpha > 1 \), unstable otherwise.
+
+\end{document}

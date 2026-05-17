@@ -1,0 +1,751 @@
+\documentclass[1pt]{article}
+\usepackage[a4paper,margin=0.2in]{geometry} % Small margins
+\usepackage{multicol} % For multiple columns
+\usepackage{amsmath, amssymb} % For math symbols
+\usepackage{bm} % Bold math
+\usepackage{graphicx} % To insert small images
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{placeins}
+\usepackage{enumitem} % To make lists compact
+\setlength{\columnsep}{1pt} % Reduce space between columns
+\raggedcolumns{}
+\begin{document}
+\begin{multicols}{3} % 3 columns
+\raggedcolumns
+\setlength{\columnseprule}{0.1pt}
+\scriptsize% Use a smaller font
+\noindent % Avoid extra space at beginning
+\abovedisplayskip=2pt
+\belowdisplayskip=2pt
+
+
+\textbf{ Order of Operations}
+\begin{enumerate}[noitemsep, topsep=0pt]
+    \item \textbf{Counting Degrees of Freedom:} 
+holonomic constraint:
+\begin{equation*}
+    F\left(\vec{r}_1, \vec{r}_2 \ldots, \vec{r}_N, t\right)=0
+\end{equation*}
+number of free DOF \( n=3N-k \) where \( k \) is the number of constraints.
+    \item{Find \( n \) generalized coordinates.}  
+    \item{Express in terms of generalized coordinates}  
+    \item{Calculating the Kinetic and Potential Energy}  
+    \item {Writing the Equations of Motion}
+    \end{enumerate}
+\textbf{Generalized Kinetic Energy}
+\begin{equation*}
+    T = \frac{1}{2} m (\dot{x}^2 + \dot{y}^2 + \dot{z}^2) \quad \text{(Cartesian)}
+\end{equation*}
+\begin{equation*}
+    T = \frac{1}{2} m (\dot{r}^2 + r^2 \dot{\theta}^2 + r^2 \sin^2 \theta \dot{\phi}^2) \quad \text{(Spherical)}
+\end{equation*}
+\begin{equation*}
+    T = \frac{1}{2} m (\dot{r}^2 + r^2 \dot{\theta}^2 + \dot{z}^2) \quad \text{(Cylindrical)}
+\end{equation*}
+
+\textbf{ (M and K Matrices)}
+\begin{equation*}
+       T = \frac{1}{2} M_{ij} \dot{q}_i \dot{q}_j=\frac{1}{2} \mathbf{\dot{q}}^T \mathbf{M} \mathbf{\dot{q}}
+\end{equation*}
+\begin{equation*}
+    V = \frac{1}{2} K_{ij} q_i q_j=\frac{1}{2} \mathbf{q}^T \mathbf{K} \mathbf{q}
+\end{equation*}
+\begin{equation*}
+M_{ij} = \frac{\partial^2 \mathcal{L}}{\partial \dot{q}_i \partial \dot{q}_j} \ \quad
+K_{ij} = -\frac{\partial^2 \mathcal{L}}{\partial q_i \partial q_j} 
+\end{equation*}
+
+\[
+M_{ij} =
+\begin{bmatrix}
+\frac{\partial^2 \mathcal{L}}{\partial \dot{q}_1 \partial \dot{q}_1} & \frac{\partial^2 \mathcal{L}}{\partial \dot{q}_1 \partial \dot{q}_2} & \frac{\partial^2 \mathcal{L}}{\partial \dot{q}_1 \partial \dot{q}_3} \\
+\frac{\partial^2 \mathcal{L}}{\partial \dot{q}_2 \partial \dot{q}_1} & \frac{\partial^2 \mathcal{L}}{\partial \dot{q}_2 \partial \dot{q}_2} & \frac{\partial^2 \mathcal{L}}{\partial \dot{q}_2 \partial \dot{q}_3} \\
+\frac{\partial^2 \mathcal{L}}{\partial \dot{q}_3 \partial \dot{q}_1} & \frac{\partial^2 \mathcal{L}}{\partial \dot{q}_3 \partial \dot{q}_2} & \frac{\partial^2 \mathcal{L}}{\partial \dot{q}_3 \partial \dot{q}_3}
+\end{bmatrix}
+\]
+
+\[
+K_{ij} =
+-\begin{bmatrix}
+\frac{\partial^2 \mathcal{L}}{\partial q_1 \partial q_1} & \frac{\partial^2 \mathcal{L}}{\partial q_1 \partial q_2} & \frac{\partial^2 \mathcal{L}}{\partial q_1 \partial q_3} \\
+\frac{\partial^2 \mathcal{L}}{\partial q_2 \partial q_1} & \frac{\partial^2 \mathcal{L}}{\partial q_2 \partial q_2} & \frac{\partial^2 \mathcal{L}}{\partial q_2 \partial q_3} \\
+\frac{\partial^2 \mathcal{L}}{\partial q_3 \partial q_1} & \frac{\partial^2 \mathcal{L}}{\partial q_3 \partial q_2} & \frac{\partial^2 \mathcal{L}}{\partial q_3 \partial q_3}
+\end{bmatrix}
+\]
+
+
+\begin{align*}
+    M_{ij} \ddot{q}_j + K_{ij} q_j = 0
+\end{align*}
+\textbf{generalized velocity and acceleration}
+\begin{equation*}
+    \dot{r}_a = \sum_i \frac{\partial r_a}{\partial q_i} \dot{q}_i
+\end{equation*}
+\begin{equation*}
+    \ddot{r}_a = \sum_i \frac{\partial r_a}{\partial q_i} \ddot{q}_i + \sum_{i,j} \frac{\partial^2 r_a}{\partial q_i \partial q_j} \dot{q}_i \dot{q}_j
+\end{equation*}
+\textbf{Generalized Force}
+\begin{equation*}
+    Q_{j}=\sum_{i}\vec{F}_{i}\frac{\partial r_{i}}{\partial q_{j}}=-\sum_i \vec{\nabla}_{r_i} V \frac{\partial \overrightarrow{r_i}}{\partial q_j}=-\frac{\partial V}{\partial q_j}
+\end{equation*}
+\begin{equation*}Q_j^{(n c)}=\sum_i \vec{F}_i^{(n c)} \cdot \frac{\partial \vec{r}_i}{\partial q_j}=\sum_i \vec{F}_i^{(n c)} \cdot \frac{\partial \vec{v}_i}{\partial \dot{q}_j}\end{equation*}
+
+\textbf{conservative force}
+\begin{equation*}
+     \mathbf{F} = -\nabla V
+\end{equation*}
+\textbf{central force}
+\begin{equation*}
+    \mathbf{F} =-\vec{\nabla} V(r)=-\frac{\partial V}{\partial r} \hat{r}
+\end{equation*}
+\begin{equation*}
+    W = \int \mathbf{F} \cdot d\mathbf{r}
+\end{equation*}
+\[\vec{J}=\intop_{t_{1}}^{t_{2}}Fdt\]
+
+\textbf{Angular Momentum and Torque}
+\begin{equation*}
+    \mathbf{L} = \mathbf{r} \times \mathbf{p}=mr^2=I\omega
+\end{equation*}
+\begin{equation*}
+    \tau= \mathbf{r} \times \mathbf{F} = \frac{d\mathbf{L}}{dt}=mr^{2}\dot{\omega}=\mathbf{I}\dot{\omega}
+\end{equation*}
+
+\textbf{Non-Inertial Systems}
+\begin{equation*}
+    \mathbf{F}_{\text{eff}} = \mathbf{F} - m \mathbf{a}_{\text{frame}} - 2m (\mathbf{\Omega} \times \mathbf{v}) - m \mathbf{\Omega} \times (\mathbf{\Omega} \times \mathbf{r})
+\end{equation*}
+
+\begin{equation*}
+    \mathbf{F}_{\text{centrifugal}} = -m \mathbf{\Omega} \times (\mathbf{\Omega} \times \mathbf{r})
+\end{equation*}
+
+\begin{equation*}
+    \mathbf{F}_{\text{Coriolis}} = -2m (\mathbf{\Omega} \times \mathbf{v})
+\end{equation*}
+
+\textbf{Lagrangian Mechanics}
+ \begin{equation*}
+    \frac{d}{dt} \left( \frac{\partial \mathcal{L}}{\partial \dot{q}} \right) - \frac{\mathcal{L}}{\partial q} = 0
+\end{equation*}
+\begin{align*}
+    {\frac{\partial \mathcal{\mathcal{L}}}{\partial q}}-{\frac{d}{d t}}\left({\frac{\partial \mathcal{L}}{\partial{\dot{q}}}}\right)+{\frac{d^{2}}{d t^{2}}}\left({\frac{\partial \mathcal{L}}{\partial{\ddot{q}}}}\right)=0
+\end{align*}
+
+\textbf{with force}
+\begin{equation*}
+    \frac{d}{dt}\left[\frac{\partial T}{\partial\dot{q}_{j}}\right]-\frac{\partial T}{\partial q_{j}}=-\frac{\partial V}{\partial q_j}=Q_{j}
+\end{equation*}
+ \begin{equation*}
+     \frac{d}{d t}\left[\frac{\partial \mathcal{L}}{\partial \dot{q}_j}\right]-\frac{\partial \mathcal{L}}{\partial q_j}=Q_j^{(n c)}=\sum_{i}\vec{F}_{i}\frac{\partial r_{i}}{\partial q_{j}}
+ \end{equation*}
+      \textbf{Rayleigh  Function:}
+    \begin{equation*}
+        \mathbf{F = \frac{1}{2} \sum_{i,j} C_{ij} \dot{q}_i \dot{q}_j}
+    \end{equation*}
+    \begin{equation*}
+    F = \frac{1}{2} \sum_{i} C_i \dot{q}_i^2
+\end{equation*}
+    
+     \textbf{Dissipative Force:}
+    \begin{equation*}
+        \mathbf{Q_i^{\text{(diss)}} = - \frac{\partial F}{\partial \dot{q}_i}}=- c \dot{x}
+    \end{equation*}
+    
+     \textbf{Euler-Lagrange Equation with Dissipation:}
+    \begin{equation*}
+        \mathbf{\frac{d}{dt} \left( \frac{\partial \mathcal{L}}{\partial \dot{q}_i} \right) - \frac{\partial \mathcal{L}}{\partial q_i} = -\frac{\partial F}{\partial \dot{q}_i}}
+    \end{equation*}
+    
+     \textbf{Power Dissipated:}
+    \begin{equation*}
+        \mathbf{P_{\text{diss}} = \sum_{i} Q_i^{\text{(diss)}} \dot{q}_i = 2F}
+    \end{equation*}
+    
+
+\textbf{Cyclic Coordinates Conservation}
+\begin{equation*}
+    \frac{\partial \mathcal{L}}{\partial q_i} = 0 \implies \frac{d}{dt}\frac{\partial \mathcal{L}}{\partial \dot{q}_i} =\frac{d}{dt}p_i = 0 \implies\\ p_i=\text{const.}
+\end{equation*}
+\textbf{Effective Lagrangian}
+\begin{equation*}
+        \mathcal{L}_{\text{effective}}=\mathcal{L}-p_i \dot{q}_i\quad \texttt{(for cyclic coordinates)}
+\end{equation*}
+    
+\textbf{Canonical momentum}
+\begin{equation*}
+    p_i = \frac{\partial \mathcal{L}}{\partial \dot{q_i}}
+\end{equation*}
+\begin{equation*}
+    S[q(t)] = \int_{t_1}^{t_2} \mathcal{L}(\dot{q},q,t) \, dt
+\end{equation*}
+\textbf{Noether's Theorem}
+\begin{equation*}
+    \frac{d}{dt}\left(\sum_i \frac{\partial \mathcal{L}}{\partial \dot{q}_i} \frac{\partial f}{\partial \alpha}\right) = 0
+\end{equation*}
+\begin{equation*}
+    \frac{\partial\mathcal{L}}{\partial t}=0\Rightarrow E=\text{const.}
+\end{equation*}
+\textbf{Hamiltonian Mechanics}
+\begin{equation*}
+    \mathcal{H} = \sum_i \dot{q}_i p_i - \mathcal{L}
+\end{equation*}
+\begin{equation*}
+    p_i = \frac{\partial \mathcal{L}}{\partial \dot{q_i}}
+\end{equation*}
+\begin{equation*}
+    \dot{q_i} = \frac{\partial \mathcal{H}}{\partial p_i}=\{\mathcal{H},q_i\}, \quad \dot{p_i} = -\frac{\partial \mathcal{H}}{\partial q_i}=-\{\mathcal{H},p_i\}
+\end{equation*}
+\[\frac{d}{dt} f \left( p_i, q_i, t \right) = \{ \mathcal{H}, f \} + \frac{\partial f}{\partial t}
+\]
+\[\frac{d}{dt} \{ f, g \} = \frac{\partial \{ f, g \}}{\partial t} + \{ \{ f, g \}, \mathcal{H} \}
+\]
+
+\textbf{Hamiltonian for Common Systems}
+\begin{equation*}
+   \mathcal{H} = \frac{p^2}{2m} + \frac{1}{2} k x^2 \quad \text{(Harmonic Oscillator)}
+\end{equation*}
+\begin{equation*}
+    \mathcal{H} = \frac{p^2}{2m} - \frac{GMm}{r} \quad \text{(Kepler Problem)}
+\end{equation*}
+
+\textbf{Poisson Brackets}
+\begin{equation*}
+    \{ f, g \} = \sum_i \left( \frac{\partial f}{\partial q_i} \frac{\partial g}{\partial p_i} - \frac{\partial f}{\partial p_i} \frac{\partial g}{\partial q_i} \right)
+\end{equation*}
+\begin{align*}
+    q_i, q_j = \{p_i, p_j\} = 0, \quad \{p_i, q_j\} = \delta_{ij}
+\end{align*}
+\begin{equation*}
+    \{A, B\} = -\{B, A\}
+\end{equation*}
+\begin{equation*}
+    \{A, BC\} = B\{A, C\} + \{A, B\}C
+\end{equation*}
+\begin{align*}
+    \{{f, \{g,h\}\} + \{g, \{h,f\}\} + \{h, \{f,g\}\} = 0}
+\end{align*}
+\begin{align*}
+   \{f(u), g(v)\} = \{u,v\} \frac{\partial f}{\partial u} \frac{\partial g}{\partial v}
+\end{align*}
+\begin{align*}
+   \{ f(\vec{p}), g(\vec{q})\} = \sum \frac{\partial f}{\partial p_i} \frac{\partial g}{\partial q_i}
+\end{align*}
+\begin{align*}
+    f(\vec{q}, \vec{p}), q_i\} = \frac{\partial f}{\partial p_i}, \quad \{ f(\vec{q}, \vec{p}), p_i\} = -\frac{\partial f}{\partial q_i}
+\end{align*}
+\begin{align*}
+    \{L_i, L_j\} = -\sum_k \epsilon_{ijk} L_k
+\end{align*}
+\textbf{Constant of Motion}
+\begin{equation*}
+    \frac{dA}{dt} = \{ A, H \} + \frac{\partial A}{\partial t}
+\end{equation*}
+
+
+\textbf{Canonical Transformations Condition}
+\begin{equation*}
+    \sum_i (p_i dq_i - P_i dQ_i) = dF
+\end{equation*}
+
+\textbf{Generating Functions}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\(F_1(q,Q)\) & \( p=\dfrac{\partial F_1}{\partial q},\quad P=-\dfrac{\partial F_1}{\partial Q}\) \\[4pt] \hline
+\(F_2(q,P)\) & \( p=\dfrac{\partial F_2}{\partial q},\quad Q=\dfrac{\partial F_2}{\partial P}\) \\[4pt] \hline
+\(F_3(p,Q)\) & \( q=-\dfrac{\partial F_3}{\partial p},\quad P=-\dfrac{\partial F_3}{\partial Q}\) \\[4pt] \hline
+\(F_4(p,P)\) & \( q=-\dfrac{\partial F_4}{\partial p},\quad Q=\dfrac{\partial F_4}{\partial P}\) \\[4pt] \hline
+\end{tabular}
+\end{center}
+
+\textbf{Damped Harmonic Oscillator}
+\begin{equation*}
+    \ddot{x} + 2\gamma\dot{x} + \omega_0^2 x = f(x)
+\end{equation*}
+
+\textbf{Fourier Transform Solution}
+\begin{equation*}
+    x_p = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \frac{\hat{f}(\omega) e^{i\omega t} d\omega}{\omega_0^2 - \omega^2 + 2i\gamma\omega}
+\end{equation*}
+
+\textbf{Forced Oscillation}
+\begin{align}
+    x_p &= \frac{f_0 \cos(\omega_d t + \varphi)}{\sqrt{(\omega_0^2 - \omega_d^2)^2 + (2\gamma\omega_d)^2}} \\
+    \varphi &= \tan^{-1} \left( \frac{2\gamma\omega_d}{\omega_0^2 - \omega_d^2} \right)
+\end{align}
+
+\textbf{Matrix Inverse}
+\begin{equation*}
+    A = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \Rightarrow A^{-1} = \frac{1}{\det A} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}
+\end{equation*}
+\textbf{Small Oscillations} Solution Scheme
+
+We assume that the system has an equilibrium at $\dot{\mathbf{q}}_0$. We define a new coordinate system $q_i$ based on a displacement from equilibrium. Expanding the Lagrangian to second order, we identify:
+First-order terms in time vanish. Constants remain.
+
+Expressed in the form:
+\[
+\mathcal{L}_{\text{eff}} \approx \frac{1}{2} \dot{\mathbf{q}}^T M \dot{\mathbf{q}} - \frac{1}{2} \mathbf{q}^T K \mathbf{q}
+\]
+
+Now, we solve the eigenvalue problem:
+\[
+\det \left( K - \omega^2 M \right) = 0
+\]
+The final solution $\vec{\omega}$ the eigenvalues vector with the $\vec{u_i}$ the eigenvector
+\[\vec{q}(t)\approx\sum_i \vec{u_i}\cos(\omega_it)\]
+\textbf{Oscillatory Motion Period}
+\begin{align*}
+        t = \int_{x_0}^{x} \frac{dx}{\sqrt{\frac{2}{m} (E - V(x))}} \\
+        \tau = 2 \int_{x_1(E)}^{x_2(E)} \frac{dx}{\sqrt{\frac{2}{m} (E - V(x))}}
+\end{align*}
+
+
+
+ $x_1(E)$ and $x_2(E)$ are the roots of the equation $E = V(x)$, representing the turning points.
+
+\textbf{Orbital Motion}
+\begin{equation*}
+    \frac{d^2u}{d\theta^2} + u = -\frac{m}{L^2} \frac{dV}{du}
+\end{equation*}
+\begin{equation*}
+    r = \frac{a(1 - e^2)}{1 + e\cos\theta}
+\end{equation*}
+\begin{equation*}
+    r(\theta) = \frac{r_0}{1 + \epsilon\cos(\theta-\theta_0)}=\frac{a(1-\epsilon^2)}{1 + \epsilon\cos(\theta-\theta_0)}
+\end{equation*}
+\begin{align*}
+    r_0 = \frac{p_\theta^2}{\mu G m_1 m_2}=a(1-\epsilon ^2)
+\end{align*}
+\begin{align*}
+    r_{\min} = \frac{r_0}{1 + \epsilon}=a(1-\varepsilon), \quad r_{\max} = \frac{r_0}{1 - \epsilon}=a(1+\varepsilon)
+\end{align*}
+\begin{align*}
+    a=\frac{r_{max}+r_{min}}{2},\ b=a\sqrt{1-\varepsilon^2}
+\end{align*}
+\begin{align*}
+    \varepsilon=\sqrt{1+\frac{2E p_\theta^{2}}{G^{2}\mu M_{1}^{2}M_{2}^{2}}}=\sqrt{1-\left(b/a\right)^{2}}
+\end{align*}
+
+\begin{equation*}
+    E = \frac{1}{2} m v^2 - \frac{GMm}{r}
+\end{equation*}
+\begin{align*}
+    \dot{r} = \sqrt{\frac{2}{\mu} \left( E - V(r) - \frac{\ell^2}{2\mu r^2} \right)}
+\end{align*}
+\begin{equation*}
+    L = m r^2 \dot{\theta} = \text{constant}
+\end{equation*}
+\begin{align*}
+    \varepsilon<1, \quad r(\theta) = \frac{r_0}{1 + e \cos(\theta - \theta_0)}
+\end{align*}
+\begin{align*}
+    \varepsilon = 1, \quad r(\theta) = \frac{p_\theta^2}{2\mu G m_1 m_2}
+\end{align*}
+\begin{align*}
+    \varepsilon>1, \quad r(\theta) = \frac{r_0}{1 + \varepsilon \cos(\theta - \theta_0)}
+\end{align*}
+\begin{center}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{0.05\linewidth}|>{\raggedright\arraybackslash}p{0.35\linewidth}|l|} \hline 
+
+Orbit & Condition & Key Eq.\\[2pt] \hline 
+
+Circ. & \(E=E_{\min},\,\epsilon=0\) & \(r_0=\dfrac{L^2}{\mu G m_1m_2}\)\\[4pt] \hline  
+Ellip. & \(E_{\min}<E<0,\,0<\epsilon<1\) & \(r=\dfrac{Gm_1m_2}{2E}\Bigl(1\pm\sqrt{1+\frac{2EL^2}{\mu (Gm_1m_2)^2}}\Bigr)\)\\[4pt] \hline  
+Parab. & \(E=0,\,\epsilon=1\) & \(r_{\text{par}}=\dfrac{L^2}{2\mu Gm_1m_2}\)\\[4pt] \hline 
+Hyp. & \(E>0,\,\epsilon>1\) & \(r_{\text{hyp}}=\dfrac{Gm_1m_2}{2E}(1+\epsilon)\)\\ \hline
+
+\end{tabular}
+\end{center}
+\textbf{Kepler Two-Body Problem}
+\begin{align*}
+    L = \frac{\mu}{2} \left( \dot{r}^2 + r^2 \dot{\phi}^2 \right) - V(r).
+\end{align*}
+\begin{align*}
+    \mu \ddot{r} = -\frac{dV}{dr} + \frac{p_\theta^2}{\mu r^3}
+\end{align*}
+\begin{align*}
+    \mu=\frac{m_1m_2}{m_1+m_2}
+\end{align*}
+
+\text{in the COM frame}
+\begin{align*}
+    L = \frac{\mu \dot{r}^2}{2} - V(r)
+\end{align*}
+\begin{align*}
+    L = \mathbf{r} \times \mu \dot{\mathbf{r}} = \text{const}
+\end{align*}
+\begin{align*}
+    P_{\phi} = \frac{\partial L}{\partial \dot{\phi}} = \mu r^2 \dot{\phi} = \text{const}
+\end{align*}
+\begin{align*}
+      \mu \ddot{\mathbf{r}} = -\frac{GM\mu}{r^2} \hat{\mathbf{r}} = -\frac{\partial V_{\text{eff}}}{\partial r}
+\end{align*}
+    \begin{align*}
+        V_{\text{eff}}(r) = V(r) + \frac{p_\theta^2}{2\mu r^2}=- \frac{G M_1 M_2}{r} + \frac{l^2}{2\mu r^2},
+    \end{align*}
+   
+\begin{align*}
+    E = \frac{1}{2} \mu \dot{r}^2 + V_{\text{eff}}(r)
+\end{align*}
+\begin{align*}
+    \Delta\phi\equiv\mathrm{~{2}}\int_{r_{1}}^{r_{2}}\frac{L d r}{r^{2}\sqrt{2\mu(E-V_{e f f}(r))}}
+\end{align*}
+
+
+\textbf{Laplace-Runge-Lenz Vector}
+\begin{equation*}
+    \mathbf{A} = \mathbf{p} \times \mathbf{L} - m k \hat{\mathbf{r}}
+\end{equation*}
+
+\textbf{Rigid Body Dynamics}
+\begin{equation*}
+    \mathbf{R}_{CM} = \frac{1}{M} \sum_i m_i \mathbf{r}_i
+\end{equation*}
+\begin{equation*}
+    I_{ij} = \sum_k m_k \left( r_k^2 \delta_{ij} - x_{k_i} x_{k_j} \right)
+\end{equation*}
+\begin{equation*}
+    I = I_C + Md^2
+\end{equation*}
+\begin{equation*}
+\begin{cases}
+    I_1 \dot{\omega}_1 + (I_3 - I_2) \omega_2 \omega_3 = \tau_1 \\
+    I_2 \dot{\omega}_2 + (I_1 - I_3) \omega_3 \omega_1 = \tau_2 \\
+    I_3 \dot{\omega}_3 + (I_2 - I_1) \omega_1 \omega_2 = \tau_3
+\end{cases}
+\end{equation*}
+
+
+\textbf{Moment of Inertia }
+\begin{equation}
+    I = \sum m_{\alpha} r_{\alpha}^2
+\end{equation}
+\[I = \int_V \rho(\mathbf{r})\, r^2\, dV\]
+\begin{equation*}
+    I_{xx} + I_{yy} = I_{zz}
+\end{equation*}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{|l |c|}
+\toprule
+\textbf{Object} & \textbf{\(I\)} \\
+\midrule
+Solid Sphere & \(\frac{2}{5}MR^2\)\\[2mm] \hline 
+Hollow Sphere & \(\frac{2}{3}MR^2\)\\[2mm] \hline 
+Solid Cylinder/Thin Disk & \(\frac{1}{2}MR^2\)\\[2mm] \hline 
+Thin Rod (center) & \(\frac{1}{12}ML^2\)\\[2mm] \hline 
+Rod (end) & \(\frac{1}{3}ML^2\)\\[2mm] \hline 
+Rectangle (center) & \(\frac{1}{12}M(a^2+b^2)\)\\[2mm] \hline 
+Ring (center) & \(MR^2\)\\[2mm] \hline 
+Solid Cone (sym. axis) & \(\frac{3}{10}MR^2\)\\[2mm]
+Cube (center) & \(\frac{1}{6}Ma^2\)\\
+\bottomrule \hline
+\end{tabular}
+
+\[T=T_{C.M}+T_{Rot}=\frac{M}{2}V_{C.M}^2+\frac{I_{C.M}\omega^2}{2}=\]
+\[=\frac{M}{2}V_{cm}^{2}+\frac{1}{2}\vec{\omega}^{T}I\vec{\omega}\]
+\[T_{rot}=\frac{1}{2}\sum_{i,j}\omega_{i}I_{i,j}\omega_{j}\]
+
+\textbf{Scattering }
+For scattering with impact parameter $\rho$, scattering angle $\theta$, asymptotic velocity $v_\infty$, and reduced mass $\mu$, the differential cross section is:
+\begin{equation*}
+    \frac{d\sigma}{d\Omega}
+    \;=\;
+    \frac{\rho(\theta)}{\sin \theta}
+    \left|\frac{d\rho}{d\theta}\right|.
+\end{equation*}
+The total cross section is:
+\begin{equation*}
+    \sigma_{T}
+    \;=\;
+    2\pi \int_{0}^{\pi}
+    \rho(\theta)
+    \left|\frac{d\rho}{d\theta}\right|
+    \,d\theta=2\pi\intop_{0}^{\pi}\frac{d\sigma}{d\Omega}\sin\theta d\theta
+\end{equation*}
+\[\Delta \theta = 2 \int_{r_{\min}}^{\infty} \frac{l / r^2}{\sqrt{2\mu \left( E - V(r) - \frac{l^2}{2\mu r^2} \right)}} \, dr
+\]
+We identify
+\[
+E \;=\;\frac12\,\mu\,v_{\infty}^{2},
+\quad
+\ell \;=\;\mu\,\rho\,v_{\infty},
+\]
+and if $r_{\min}$ is the distance of closest approach in the scattering, then
+\[\ \rho^2=\frac{l^2}{\mu^2v_{\infty}^{2}}=\frac{l^2}{2\mu E}\]
+\[E=V\left(r_{min}\right)+\frac{l^{2}}{2\mu r_{min}^{2}}\]
+\[
+\rho^{2}
+\;=\;
+r_{\min}^{2}\Bigl(1 \;-\;\frac{V(r_{\min})}{E}\Bigr).
+\]
+
+\begin{equation*}
+    \theta \approx - \frac{2b}{\mu v_\infty^2} \int_b^\infty \frac{V'(r) \, dr}{\sqrt{r^2 - b^2}}
+\end{equation*}
+\begin{equation*}
+    b = \frac{L}{\mu v_\infty}
+\end{equation*}
+\textbf{Legendre Transform}
+Given a function \( f(x) \), its Legendre transform is defined by:
+\begin{equation*}
+    \frac{df}{dx} = f'(x) = s(x)
+\end{equation*}
+Thus, we obtain a new function:
+\begin{equation*}
+    g(s) = -s\cdot x(s) + f(x(s))
+\end{equation*}
+\textbf{Inverse Transform}
+We assume that the transform of \( g(s) \) satisfies:
+\begin{equation*}
+    V(x) = g(s(x)) + f(x)
+\end{equation*}
+Thus, we get:
+\begin{equation*}
+    -x(s) \cdot xu(x)
+\end{equation*}
+\textbf{Homogeneous Function of Degree \( k \)}
+\begin{equation*}
+    f(a x) = a^k f(x), \quad \forall a
+\end{equation*}
+\begin{equation*}
+    E_\text{Kin}(a\vec{v})=\frac{1}{ 2}ma^2v^2=a^2E_\text{Kin}(\vec{v})
+\end{equation*}
+\begin{equation*}
+    V(r)=g r^k 
+\end{equation*}
+
+\textbf{Euler’s Theorem for Homogeneous Functions}
+\begin{equation*}
+    \nabla f(x) \cdot x = k f(x)
+\end{equation*}
+Alternatively, in differential form:
+\begin{equation*}
+    x \cdot \frac{\partial f(x)}{\partial x} = k f(x)
+\end{equation*}
+\textbf{Virial Theorem}
+\begin{equation*}
+    2 \langle T \rangle + \langle V \rangle = 0
+\end{equation*}
+\begin{equation*}
+    2<K>=-<\sum_j \frac{\partial \mathcal{L}}{\partial q_j} q_j>=<\sum_i \vec{r}_i \frac{\partial V}{\partial \vec{r}_i}>
+\end{equation*}
+\[2<T>=k_{deg }<V>\]
+\textbf{Scaling}
+\[x\rightarrow\alpha x,\ t\rightarrow\beta t\Rightarrow v\rightarrow\frac{\alpha}{\beta}v\]
+\[\tilde{\mathcal{L}}=\left(\frac{\alpha}{\beta}\right)^{2}T-\alpha^{k}V\]
+\[\left(\frac{\alpha}{\beta}\right)^{2}=\alpha^{k}\Rightarrow\beta=\alpha^{1-\frac{k}{2}}\]
+\begin{equation*}
+    \frac{v^{\prime}}{v}=\left(\frac{l^{\prime}}{l}\right)^{\frac{1}{2} k}, \frac{E^{\prime}}{E}=\left(\frac{l^{\prime}}{l}\right)^k,\left(\frac{l^{\prime}}{l}\right)^{1-\frac{1}{2}k}=\frac{t'}{t}
+\end{equation*}
+\textbf{Buckingham $\Pi$ Theorem (d-distance)}
+\begin{align*}
+        f(x_1, ..., x_n) = 0 \Rightarrow f(\Pi_1, ..., \Pi_{n-r}) = 0
+\end{align*}
+\begin{equation*}
+    \tau \sim d^{1 - \frac{k}{2}}
+\end{equation*}
+
+\begin{equation*}
+    v \sim \frac{d}{\tau} \sim \frac{d}{d^{1 - \frac{k}{2}}} \sim d^{k/2}
+\end{equation*}
+
+\begin{equation*}
+    E \sim m v^2 \sim v^2 \sim d^k
+\end{equation*}
+
+\begin{equation*}
+    L \sim \frac{d^2}{\tau} \sim d^{1 + \frac{k}{2}}
+\end{equation*}
+\textbf{Elliptic Coordinates}
+\begin{equation*}
+    x = a r \cos\theta, \quad y = b r \sin\theta
+\end{equation*}
+The area element in these coordinates is:
+\begin{equation*}
+    dA = a b r \, dr \, d\theta
+\end{equation*}
+where the integral over the area is:
+\begin{equation*}
+    \int_0^{2\pi} \int_0^1 dA
+\end{equation*}
+\textbf{Binet’s Equation}
+Binet's equation describes the motion of a particle under a central force using the inverse radial distance \( u = \frac{1}{r} \):
+\begin{equation*}
+u''+u=-\frac{\mu }{p_\theta^{2}}\frac{1}{u^{2}}F(\frac{1}{u}) \end{equation*}
+where:
+- \( u = \frac{1}{r} \) is the reciprocal of the radial coordinate,
+- \( F(1/u) \) is the central force as a function of \( u \),
+\textbf{Solution for an Inverse-Square Law Force}
+For a force of the form:
+\begin{equation*}
+    F(r) = -\frac{k}{r^2}
+\end{equation*}
+Substituting into Binet’s equation:
+\begin{equation*}
+    \frac{d^2 u}{d\theta^2} + u = \frac{k}{m h^2}
+\end{equation*}
+The general solution is:
+\begin{equation*}
+    u(\theta) = \frac{1}{r} = \frac{k}{m h^2} + C \cos(\theta - \theta_0)
+\end{equation*}
+This solution describes conic sections (ellipses, parabolas, or hyperbolas)
+For gravitation 
+\begin{align*}
+    u'' + u = \frac{\mu G m_1 m_2}{p_\theta^2}
+\end{align*}
+The solution is 
+\begin{align*}
+    r(\theta) = \frac{r_0}{1 + e \cos(\theta - \theta_0)}
+\end{align*}
+where
+\begin{align*}
+    r_0 = \frac{p_\theta^2}{\mu G m_1 m_2}
+\end{align*}
+\textbf{Vector and Tensor Calculus}
+
+\begin{equation*}
+    \mathbf{a} \cdot \mathbf{b} = a_i b_i
+\end{equation*}
+\begin{equation*}
+    ( \mathbf{a} \times \mathbf{b} )_i = \epsilon_{ijk} a_j b_k
+\end{equation*}
+\begin{equation*}
+    (\nabla \times \mathbf{b})_i = \epsilon_{ijk} \partial_j b_k
+\end{equation*}
+\begin{equation*}
+    (AB)_{ij} = A_{ik} B_{kj}
+\end{equation*}
+\begin{equation*}
+    v_i \frac{1}{2} m_{jk} v_j v_k = m_{ik} v_k
+\end{equation*}
+
+\textbf{Index Notation Identity}
+\begin{equation*}
+    \epsilon_{ijk} \epsilon_{ilm} = \delta_{jl} \delta_{km} - \delta_{jm} \delta_{kl}
+\end{equation*}
+
+\textbf{Levi-Civita}
+\begin{align*}
+    \epsilon_{123}=1,\ \epsilon_{213}=-1
+    ,\ \epsilon_{221}=0
+\end{align*}
+\begin{equation*}
+    \epsilon_{ijk}= \epsilon_{jki} = -\epsilon_{jik}
+\end{equation*}
+\begin{equation*}
+    \hat{e}_i \times \hat{e}_j=\epsilon_{i j k} \hat{e}_k
+\end{equation*}
+\textbf{complete derivative}
+\begin{equation*}
+    \frac{d X}{d t}=\frac{\partial X}{\partial t}+\frac{\partial X}{\partial q} \frac{d q}{d t} 
+\end{equation*}
+\begin{align*}
+        \mathbf{r}  & = r(\cos\varphi,\ \sin\varphi) = r \hat{\mathbf{r}}\ , \\[1ex]
+   \dot{\mathbf{r}} &= \dot{r}\hat{r}+r\dot{\theta}\hat{\theta} ,\\[1ex]
+  \ddot{\mathbf{r}} &=(\ddot{r}-r\dot{\theta}^2)\hat{r}+(2\dot{r}\dot{\theta}+r\ddot{\theta})\hat{\theta}
+\end{align*}
+
+\textbf{Rotation About the $x$-Axis (Roll)}
+\begin{equation*}
+R_x(\gamma) =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos\gamma & -\sin\gamma \\
+0 & \sin\gamma & \cos\gamma
+\end{bmatrix}
+\end{equation*}
+
+\textbf{Rotation About the $y$-Axis (Pitch)}
+\begin{equation*}
+R_y(\beta) =
+\begin{bmatrix}
+\cos\beta & 0 & \sin\beta \\
+0 & 1 & 0 \\
+-\sin\beta & 0 & \cos\beta
+\end{bmatrix}
+\end{equation*}
+
+\textbf{Rotation About the $z$-Axis (Yaw)}
+\begin{equation*}
+R_z(\alpha) =
+\begin{bmatrix}
+\cos\alpha & -\sin\alpha & 0 \\
+\sin\alpha & \cos\alpha & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\end{equation*}
+\[R(\alpha, \beta, \gamma) = R_z(\alpha) R_y(\beta) R_x(\gamma)
+\]
+\textbf{angular velocity matrix}
+\begin{align*}
+\Omega=
+    \begin{pmatrix} \omega_1 \\ \omega_2 \\ \omega_3 \end{pmatrix}
+=
+\begin{pmatrix} 
+\dot{\phi} \sin\theta \sin\psi + \dot{\theta} \cos\psi \\ 
+\dot{\phi} \sin\theta \cos\psi + \dot{\theta} \sin\psi \\ 
+\dot{\psi} + \dot{\phi} \cos\theta 
+\end{pmatrix}
+\end{align*}
+\textbf{Parametric Resonance}
+\[
+\ddot{x} + \omega (t) x = 0
+\]
+where $\omega (t)=\omega (t+T)\implies x^*(t)=x(t+T)$.
+
+\textbf{Conditions for Parametric Resonance}
+We substitute the solution space of the motion and obtain a set of solutions. Due to the periodicity of the equation, we obtain a solution in the form:
+\[
+x_i (t + nT) = \mu_i^n x_i=\sum_j A_{ij}\tilde{x}(t)
+\]
+\[x_i(t)=\mu_i^{t/T}\Pi_i(t)    \]
+\[\left|\mu_{1}\right|\neq\left|\mu_{2}\right|\implies\textbf{Parametric Resonance}\]
+where the solution can be expressed as a product of periodic functions. This leads to the condition:
+\[
+\mu_1 \mu_2 = 1 \Rightarrow x_2 x_1 - x_1 x_2 = \text{const}
+\]
+Thus, parametric resonance occurs if $\mu_1 \neq 1$.
+
+\textbf{Taylor}
+\[
+(1 + x)^\alpha
+ = 1
+ + \alpha x
+ + \frac{\alpha(\alpha-1)}{2!}\,x^2
+ + \cdots
+\]
+\[
+f(x) = f(a)
+  + f'(a)\,(x - a)
+  + \frac{f''(a)}{2!}\,(x - a)^2
+   + \cdots
+\]
+\[
+\sin x
+ = x
+ - \frac{x^3}{3!}
+ + \frac{x^5}{5!}+\cdots
+\]
+\[
+\cos x
+ = 1
+ - \frac{x^2}{2!}
+ + \frac{x^4}{4!}
+ + \cdots\]\
+\[
+\frac{1}{1 - x}
+ = 1
+ + x
+ + x^2
+ + x^3+ \cdots
+\]
+
+
+\end{multicols}
+\end{document}

@@ -1,0 +1,55 @@
+\documentclass[1pt]{article}
+
+\usepackage[a4paper,margin=0.2in]{geometry} % Small margins
+
+\usepackage{multicol} % Multiple columns
+
+\usepackage{amsmath, amssymb} % Math symbols
+
+\usepackage{bm} % Bold math
+
+\usepackage{graphicx} % Insert images
+
+\usepackage{enumitem} % Compact lists
+
+\setlength{\columnsep}{2pt} % Reduce space between columns
+
+\raggedcolumns{}
+
+\begin{document}
+
+\begin{multicols}{1} % 3 columns
+
+\textbf{Buckingham π Theorem}
+
+The Buckingham π theorem states that a physical problem involving $n$ variables and $k$ fundamental dimensions can be reduced to $n-k$ dimensionless parameters $\pi_1, \pi_2, \dots, \pi_{n-k}$. This helps in simplifying complex systems through dimensional analysis.
+
+For a set of variables $x_1, x_2, \dots, x_n$, we express the dimensionless groups as:
+\begin{equation*}
+    \pi_i = x_1^{a_1} x_2^{a_2} \dots x_n^{a_n}
+\end{equation*}
+where the exponents $a_i$ are determined by solving a system of linear equations ensuring dimensional consistency.
+
+\textbf{Scaling Relations}
+
+The following relations describe scaling properties:
+\begin{equation*}
+    \tau \sim d^{1 - \frac{k}{2}}
+\end{equation*}
+
+\begin{equation*}
+    v \sim \frac{d}{\tau} \sim \frac{d}{d^{1 - \frac{k}{2}}} \sim d^{k/2}
+\end{equation*}
+
+\begin{equation*}
+    E \sim m v^2 \sim v^2 \sim d^k
+\end{equation*}
+
+\begin{equation*}
+    L \sim \frac{d^2}{\tau} \sim d^{1 + \frac{k}{2}}
+\end{equation*}
+
+\end{multicols}
+
+\end{document}
+

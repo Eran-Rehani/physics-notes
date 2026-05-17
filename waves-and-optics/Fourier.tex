@@ -1,0 +1,224 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{physics}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+\title{Fourier Transform Cheat Sheet}
+\author{University Level}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Fourier Transform: Definitions and Basic Properties}
+
+The Fourier transform of a function \( f(t) \) is defined as:
+\begin{equation}
+    \mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^{\infty} f(t)e^{-i\omega t}\, dt.
+\end{equation}
+The inverse Fourier transform is given by:
+\begin{equation}
+    f(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} F(\omega)e^{i\omega t}\, d\omega.
+\end{equation}
+
+Several useful properties include linearity, time-shifting, frequency-shifting, and the convolution theorem. In this sheet, we derive the Fourier transforms for some common functions.
+
+\newpage
+
+\section{Fourier Transform of the Dirac Delta Function}
+
+The Dirac delta function, \(\delta(t)\), is defined such that:
+\[
+\int_{-\infty}^{\infty}\delta(t) \, dt = 1,
+\]
+and for any well-behaved function \(g(t)\),
+\[
+\int_{-\infty}^{\infty} g(t)\delta(t-t_0)\, dt = g(t_0).
+\]
+
+\subsection*{Derivation}
+Starting from the definition:
+\begin{align}
+    \mathcal{F}\{\delta(t)\}(\omega) &= \int_{-\infty}^{\infty} \delta(t) e^{-i\omega t}\, dt.
+\end{align}
+Using the sifting property of the delta function (with \(t_0 = 0\)):
+\begin{align}
+    \mathcal{F}\{\delta(t)\}(\omega) &= e^{-i\omega\cdot0} = 1.
+\end{align}
+
+Thus, we have:
+\begin{equation}
+    \boxed{\mathcal{F}\{\delta(t)\}(\omega) = 1.}
+\end{equation}
+
+\newpage
+
+\section{Fourier Transform of the Rectangular Function}
+
+Define the rectangular function (also denoted as \(\operatorname{rect}(t/T)\)) by:
+\begin{equation}
+    \operatorname{rect}\left(\frac{t}{T}\right) =
+    \begin{cases}
+        1, & |t| < \frac{T}{2}, \\
+        \frac{1}{2}, & |t| = \frac{T}{2}, \\
+        0, & |t| > \frac{T}{2}.
+    \end{cases}
+\end{equation}
+
+\subsection*{Derivation}
+We compute the Fourier transform:
+\begin{align}
+    \mathcal{F}\left\{\operatorname{rect}\left(\frac{t}{T}\right)\right\}(\omega)
+    &= \int_{-\infty}^{\infty} \operatorname{rect}\left(\frac{t}{T}\right) e^{-i\omega t}\, dt \\
+    &= \int_{-T/2}^{T/2} e^{-i\omega t}\, dt.
+\end{align}
+Evaluating the integral:
+\begin{align}
+    \int_{-T/2}^{T/2} e^{-i\omega t}\, dt 
+    &= \left[ \frac{e^{-i\omega t}}{-i\omega} \right]_{t=-T/2}^{T/2} \\
+    &= \frac{1}{-i\omega} \left( e^{-i\omega (T/2)} - e^{i\omega (T/2)} \right).
+\end{align}
+Recall that:
+\[
+e^{-i\theta} - e^{i\theta} = -2i\sin\theta.
+\]
+Thus, we have:
+\begin{align}
+    \int_{-T/2}^{T/2} e^{-i\omega t}\, dt 
+    &= \frac{1}{-i\omega} \left( -2i\sin\left(\frac{\omega T}{2}\right) \right) \\
+    &= \frac{2\sin\left(\frac{\omega T}{2}\right)}{\omega}.
+\end{align}
+
+Often, this is written using the sinc function defined as:
+\[
+\operatorname{sinc}(x) = \frac{\sin x}{x}.
+\]
+Therefore,
+\begin{equation}
+    \boxed{\mathcal{F}\left\{\operatorname{rect}\left(\frac{t}{T}\right)\right\}(\omega) = T\, \operatorname{sinc}\left(\frac{\omega T}{2}\right),}
+\end{equation}
+where we have used the normalization:
+\[
+T\, \operatorname{sinc}\left(\frac{\omega T}{2}\right) = \frac{2\sin\left(\frac{\omega T}{2}\right)}{\omega}.
+\]
+
+\newpage
+
+\section{Fourier Transform of the Gaussian Function}
+
+Consider the Gaussian function:
+\begin{equation}
+    f(t) = e^{-at^2}, \quad a>0.
+\end{equation}
+
+\subsection*{Derivation}
+The Fourier transform is given by:
+\begin{align}
+    \mathcal{F}\{e^{-at^2}\}(\omega) &= \int_{-\infty}^{\infty} e^{-at^2}e^{-i\omega t}\, dt \\
+    &= \int_{-\infty}^{\infty} e^{-at^2 - i\omega t}\, dt.
+\end{align}
+
+To simplify the exponent, complete the square:
+\[
+-at^2 - i\omega t = -a\left(t^2 + \frac{i\omega}{a}t\right)
+= -a\left[\left(t + \frac{i\omega}{2a}\right)^2 - \left(\frac{i\omega}{2a}\right)^2\right].
+\]
+Thus,
+\begin{align}
+    -at^2 - i\omega t &= -a\left(t + \frac{i\omega}{2a}\right)^2 + \frac{\omega^2}{4a}.
+\end{align}
+Then, the integral becomes:
+\begin{align}
+    \mathcal{F}\{e^{-at^2}\}(\omega)
+    &= e^{-\frac{\omega^2}{4a}} \int_{-\infty}^{\infty} e^{-a\left(t+\frac{i\omega}{2a}\right)^2}\, dt.
+\end{align}
+Perform the change of variable:
+\[
+u = t + \frac{i\omega}{2a}, \quad du = dt.
+\]
+Since the shift is along the complex plane and the Gaussian decays rapidly, the integration limits remain \(-\infty\) to \(\infty\). Hence,
+\begin{align}
+    \int_{-\infty}^{\infty} e^{-a u^2}\, du = \sqrt{\frac{\pi}{a}}.
+\end{align}
+Thus, we obtain:
+\begin{equation}
+    \boxed{\mathcal{F}\{e^{-at^2}\}(\omega) = \sqrt{\frac{\pi}{a}}\, e^{-\frac{\omega^2}{4a}}.}
+\end{equation}
+
+\newpage
+
+\section{Summary of Derived Fourier Transforms}
+
+\begin{itemize}[leftmargin=*, label={--}]
+    \item \textbf{Dirac Delta:}
+    \[
+    \mathcal{F}\{\delta(t)\}(\omega) = 1.
+    \]
+    
+    \item \textbf{Rectangular Function:}
+    \[
+    \mathcal{F}\left\{\operatorname{rect}\left(\frac{t}{T}\right)\right\}(\omega) = T\, \operatorname{sinc}\left(\frac{\omega T}{2}\right) = \frac{2\sin\left(\frac{\omega T}{2}\right)}{\omega}.
+    \]
+    
+    \item \textbf{Gaussian Function:}
+    \[
+    \mathcal{F}\{e^{-at^2}\}(\omega) = \sqrt{\frac{\pi}{a}}\, e^{-\frac{\omega^2}{4a}}.
+    \]
+\end{itemize}
+
+\section{Table of Common Fourier Transforms}
+
+The Fourier transform is defined as:
+\begin{equation}
+    \mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^{\infty} f(t)e^{-i\omega t}\, dt.
+\end{equation}
+
+The inverse Fourier transform is given by:
+\begin{equation}
+    f(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega)e^{i\omega t}\, d\omega.
+\end{equation}
+
+\bigskip
+\begin{center}
+    \renewcommand{\arraystretch}{1.8}
+    \begin{tabular}{ |c|c| }
+        \hline
+        Function \( f(t) \) & Fourier Transform \( F(\omega) \) \\ 
+        \hline\hline
+        \( \delta(t) \) (Dirac Delta) & \( 1 \) \\ 
+        \hline
+        \( 1 \) & \( 2\pi \delta(\omega) \) \\
+        \hline
+        \( e^{i \omega_0 t} \) & \( 2\pi \delta(\omega - \omega_0) \) \\
+        \hline
+        \( e^{-a |t|}, \quad a > 0 \) & \( \frac{2a}{a^2 + \omega^2} \) (Lorentzian) \\
+        \hline
+        \( \operatorname{rect} \left( \frac{t}{T} \right) \) & \( T \operatorname{sinc} \left( \frac{\omega T}{2\pi} \right) \) \\
+        \hline
+        \( e^{-at^2} \) (Gaussian) & \( \sqrt{\frac{\pi}{a}} e^{-\frac{\omega^2}{4a}} \) \\
+        \hline
+        \( \cos(\omega_0 t) \) & \( \pi \left[ \delta(\omega - \omega_0) + \delta(\omega + \omega_0) \right] \) \\
+        \hline
+        \( \sin(\omega_0 t) \) & \( i\pi \left[ \delta(\omega - \omega_0) - \delta(\omega + \omega_0) \right] \) \\
+        \hline
+        \( e^{-a t} u(t), \quad a > 0 \) & \( \frac{1}{a + i\omega} \) \\
+        \hline
+        \( \frac{1}{t} \) (Hilbert Transform) & \( -i\pi \operatorname{sgn}(\omega) \) \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\bigskip
+\noindent Notes:
+\begin{itemize}
+    \item \( \operatorname{sinc}(x) = \frac{\sin(\pi x)}{\pi x} \).
+    \item \( u(t) \) is the unit step function (Heaviside function).
+    \item The **Dirac delta function** \( \delta(t) \) has the property \( \int_{-\infty}^{\infty} \delta(t) dt = 1 \).
+\end{itemize}
+
+\end{document}

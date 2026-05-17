@@ -1,0 +1,579 @@
+\documentclass[1pt]{article}
+\usepackage[a4paper,margin=0.2in]{geometry} % Small margins
+\usepackage{multicol} % For multiple columns
+\usepackage{amsmath, amssymb} % For math symbols
+\usepackage{bm} % Bold math
+\usepackage{graphicx} % To insert small images
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{placeins}
+\usepackage{enumitem} % To make lists compact
+\setlength{\columnsep}{1pt} % Reduce space between columns
+\raggedcolumns{}
+\begin{document}
+\begin{multicols}{3} % 3 columns
+\raggedcolumns
+\setlength{\columnseprule}{0.1pt}
+\scriptsize% Use a smaller font
+\noindent % Avoid extra space at beginning
+\abovedisplayskip=2pt
+\belowdisplayskip=2pt
+
+
+%----------------------- I. Mechanics & Coordinates -----------------------
+\textbf{I. Mechanics \& Coordinates}\\[2pt]
+\textbf{Order of Ops:} 
+\begin{enumerate}[noitemsep, topsep=0pt]
+    \item \textbf{DOF:} Holonomic constraint 
+    \[
+    F(\vec{r}_1, \vec{r}_2, \ldots, \vec{r}_N, t)=0,
+    \quad n=3N-k.
+    \]
+    \item Find \(n\) generalized coordinates.
+    \item Express in terms of generalized coordinates.
+    \item Compute Kinetic and Potential Energies.
+    \item Write the Equations of Motion.
+\end{enumerate}
+
+\textbf{Gen. Kinetic Energy:}  
+\[
+T = \frac{1}{2} m (\dot{x}^2+\dot{y}^2+\dot{z}^2) \quad \text{(Cartesian)}
+\]
+\[
+T = \frac{1}{2} m (\dot{r}^2+r^2\dot{\theta}^2+r^2\sin^2\theta\,\dot{\phi}^2) \quad \text{(Spherical)}
+\]
+\[
+T = \frac{1}{2} m (\dot{r}^2+r^2\dot{\theta}^2+\dot{z}^2) \quad \text{(Cylindrical)}
+\]
+
+\textbf{(M \& K Matrices):} 
+\[
+T=\frac{1}{2}M_{ij}\dot{q}_i\dot{q}_j=\frac{1}{2}\dot{\mathbf{q}}^T\mathbf{M}\dot{\mathbf{q}},\quad
+V=\frac{1}{2}K_{ij}q_iq_j=\frac{1}{2}\mathbf{q}^T\mathbf{K}\mathbf{q}
+\]
+\[
+M_{ij}=\frac{\partial^2\mathcal{L}}{\partial\dot{q}_i\partial\dot{q}_j},\quad
+K_{ij}=-\frac{\partial^2\mathcal{L}}{\partial q_i\partial q_j}
+\]
+\[
+M_{ij}\ddot{q}_j+K_{ij}q_j=0.
+\]
+
+\textbf{Gen. Vel. \& Accel.:} 
+\[
+\dot{r}_a=\sum_i\frac{\partial r_a}{\partial q_i}\dot{q}_i,\quad
+\ddot{r}_a=\sum_i\frac{\partial r_a}{\partial q_i}\ddot{q}_i+\sum_{i,j}\frac{\partial^2r_a}{\partial q_i\partial q_j}\dot{q}_i\dot{q}_j.
+\]
+
+\textbf{Gen. Force:} 
+\[
+Q_j=\sum_i\vec{F}_i\frac{\partial r_i}{\partial q_j}
+=-\sum_i\vec{\nabla}_{r_i}V\frac{\partial \vec{r}_i}{\partial q_j}
+=-\frac{\partial V}{\partial q_j}.
+\]
+\[
+Q_j^{(nc)}=\sum_i\vec{F}_i^{(nc)}\cdot\frac{\partial \vec{r}_i}{\partial q_j}
+=\sum_i\vec{F}_i^{(nc)}\cdot\frac{\partial \vec{v}_i}{\partial \dot{q}_j}.
+\]
+
+\textbf{Conservative \& Central Forces:} 
+\[
+\mathbf{F}=-\nabla V,\quad
+\mathbf{F}=-\vec{\nabla}V(r)=-\frac{\partial V}{\partial r}\,\hat{r},
+\]
+\[
+W=\int \mathbf{F}\cdot d\mathbf{r},\quad
+\vec{J}=\int_{t_1}^{t_2}F\,dt.
+\]
+
+\textbf{Ang. Momentum \& Torque:}
+\[
+\mathbf{L}=\mathbf{r}\times\mathbf{p}=I\omega,\quad
+\tau=\mathbf{r}\times\mathbf{F}=\frac{d\mathbf{L}}{dt}=\mathbf{I}\dot{\omega}.
+\]
+
+\textbf{Non-Inertial:} 
+\[
+\mathbf{F}_{\text{eff}}=\mathbf{F}-m\mathbf{a}_{\text{frame}}
+-2m(\mathbf{\Omega}\times\mathbf{v})
+-m\mathbf{\Omega}\times(\mathbf{\Omega}\times\mathbf{r}),
+\]
+\[
+\mathbf{F}_{\text{centrifugal}}=-m\mathbf{\Omega}\times(\mathbf{\Omega}\times\mathbf{r}),
+\quad
+\mathbf{F}_{\text{Coriolis}}=-2m(\mathbf{\Omega}\times\mathbf{v}).
+\]
+
+%----------------------- II. Lagrange, Hamilton \& H-J -----------------------
+\textbf{II. Lagrange, Hamilton \& H-J}\\[2pt]
+\textbf{Lagrange Eq.:} 
+\[
+\frac{d}{dt}\left(\frac{\partial\mathcal{L}}{\partial\dot{q}}\right)
+-\frac{\partial\mathcal{L}}{\partial q}=0,
+\]
+\[
+\frac{\partial\mathcal{L}}{\partial q}
+-\frac{d}{dt}\left(\frac{\partial\mathcal{L}}{\partial\dot{q}}\right)
++\frac{d^2}{dt^2}\left(\frac{\partial\mathcal{L}}{\partial\ddot{q}}\right)=0.
+\]
+
+\textbf{With Force:} 
+\[
+\frac{d}{dt}\left[\frac{\partial T}{\partial\dot{q}_j}\right]
+-\frac{\partial T}{\partial q_j}
+=-\frac{\partial V}{\partial q_j}=Q_j,
+\]
+\[
+\frac{d}{dt}\left[\frac{\partial\mathcal{L}}{\partial\dot{q}_j}\right]
+-\frac{\partial\mathcal{L}}{\partial q_j}
+=Q_j^{(nc)}.
+\]
+
+\textbf{Rayleigh \& Dissipation:} 
+\[
+F=\frac{1}{2}\sum_{i,j}C_{ij}\dot{q}_i\dot{q}_j,\quad
+F=\frac{1}{2}\sum_i C_i\dot{q}_i^2,
+\]
+\[
+Q_i^{(\text{diss})}=-\frac{\partial F}{\partial\dot{q}_i}=-c\dot{x},
+\]
+\[
+\frac{d}{dt}\left(\frac{\partial\mathcal{L}}{\partial\dot{q}_i}\right)
+-\frac{\partial\mathcal{L}}{\partial q_i}
+=-\frac{\partial F}{\partial\dot{q}_i},
+\]
+\[
+P_{\text{diss}}=\sum_i Q_i^{(\text{diss})}\dot{q}_i=2F.
+\]
+
+\textbf{Cyclic Coord.:} 
+\[
+\frac{\partial\mathcal{L}}{\partial q_i}=0
+\implies\frac{d}{dt}\left(\frac{\partial\mathcal{L}}{\partial\dot{q}_i}\right)=0
+\implies p_i=\text{const.}
+\]
+\[
+\mathcal{L}_{\text{eff}}=\mathcal{L}-p_i\dot{q}_i\,\,\texttt{(cyclic)}.
+\]
+
+\textbf{Canonical Mom.:} 
+\[
+p_i=\frac{\partial\mathcal{L}}{\partial\dot{q}_i},\quad
+S[q(t)]=\int_{t_1}^{t_2}\mathcal{L}(\dot{q},q,t)\,dt.
+\]
+
+\textbf{Noether:} 
+\[
+\frac{d}{dt}\left(\sum_i\frac{\partial\mathcal{L}}{\partial\dot{q}_i}\frac{\partial f}{\partial\alpha}\right)=0,
+\quad \frac{\partial\mathcal{L}}{\partial t}=0\Rightarrow E=\text{const.}
+\]
+
+\textbf{Hamiltonian:} 
+\[
+\mathcal{H}=\sum_i\dot{q}_ip_i-\mathcal{L},\quad
+\dot{q}_i=\frac{\partial\mathcal{H}}{\partial p_i},\quad
+\dot{p}_i=-\frac{\partial\mathcal{H}}{\partial q_i}.
+\]
+\[
+\frac{d}{dt}f(p_i,q_i,t)
+=\{ \mathcal{H},f \}+\frac{\partial f}{\partial t},
+\quad \frac{d}{dt}\{ f,g \}
+=\frac{\partial\{ f,g \}}{\partial t}+\{\{ f,g \},\mathcal{H}\}.
+\]
+
+\textbf{Hamiltonians:} 
+\[
+\mathcal{H}=\frac{p^2}{2m}+\frac{1}{2}kx^2\quad\text{(Harmonic Oscillator)},
+\]
+\[
+\mathcal{H}=\frac{p^2}{2m}-\frac{GMm}{r}\quad\text{(Kepler Problem)}.
+\]
+
+\textbf{Poisson Brackets:} 
+\[
+\{f,g\}=\sum_i\left(\frac{\partial f}{\partial q_i}\frac{\partial g}{\partial p_i}
+-\frac{\partial f}{\partial p_i}\frac{\partial g}{\partial q_i}\right),
+\]
+\[
+q_i,\,q_j= \{p_i,p_j\}=0,\quad \{p_i,q_j\}=\delta_{ij},
+\]
+\[
+\{A,B\}=-\{B,A\},\quad \{A,BC\}=B\{A,C\}+\{A,B\}C.
+\]
+\[
+\{L_i,L_j\}=-\sum_k\epsilon_{ijk}L_k.
+\]
+
+\textbf{Hamilton--Jacobi:} 
+\[
+\frac{\partial S}{\partial t}+H\left(q_i,\frac{\partial S}{\partial q_i},t\right)=0.
+\]
+
+%----------------------- III. Canonical & Oscillations -----------------------
+\textbf{III. Canonical \& Oscillations}\\[2pt]
+\textbf{Gen. Functions (Table):}
+\begin{center}
+\begin{tabular}{c l}
+$F_1$ & $p=\dfrac{\partial F_1}{\partial q},\quad P=-\dfrac{\partial F_1}{\partial Q}$\\[4pt]
+$F_2$ & $p=\dfrac{\partial F_2}{\partial q},\quad Q=\dfrac{\partial F_2}{\partial P}$\\[4pt]
+$F_3$ & $q=-\dfrac{\partial F_3}{\partial p},\quad P=-\dfrac{\partial F_3}{\partial Q}$\\[4pt]
+$F_4$ & $q=-\dfrac{\partial F_4}{\partial p},\quad Q=\dfrac{\partial F_4}{\partial P}$
+\end{tabular}
+\end{center}
+
+\textbf{Damped Harmonic Osc.:} 
+\[
+\ddot{x}+2\gamma\dot{x}+\omega_0^2x=f(x).
+\]
+\textbf{Fourier Sol.:} 
+\[
+x_p=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}\frac{\hat{f}(\omega)e^{i\omega t}\,d\omega}
+{\omega_0^2-\omega^2+2i\gamma\omega}.
+\]
+\textbf{Forced Osc.:} 
+\begin{align}
+x_p&=\frac{f_0\cos(\omega_dt+\varphi)}
+{\sqrt{(\omega_0^2-\omega_d^2)^2+(2\gamma\omega_d)^2}},\\[4pt]
+\varphi&=\tan^{-1}\left(\frac{2\gamma\omega_d}{\omega_0^2-\omega_d^2}\right).
+\end{align}
+
+\textbf{Matrix Inverse:} 
+\[
+A=\begin{pmatrix} a&b\\c&d \end{pmatrix}
+\Rightarrow A^{-1}=\frac{1}{\det A}\begin{pmatrix} d&-b\\-c&a \end{pmatrix}.
+\]
+
+\textbf{Small Oscillations:} 
+\[
+\mathcal{L}_{\text{eff}}\approx\frac{1}{2}\dot{\mathbf{q}}^T M\dot{\mathbf{q}}
+-\frac{1}{2}\mathbf{q}^T K\mathbf{q},
+\]
+\[
+\det(K-\omega^2M)=0,\quad
+\vec{q}(t)\approx\sum_i\vec{u}_i\cos(\omega_it).
+\]
+\[
+t=\int_{x_0}^{x}\frac{dx}{\sqrt{\frac{2}{m}(E-V(x))}},\quad
+\tau=2\int_{x_1(E)}^{x_2(E)}\frac{dx}{\sqrt{\frac{2}{m}(E-V(x))}}.
+\]
+
+%----------------------- IV. Orbits & Celestial -----------------------
+\textbf{IV. Orbits \& Celestial}\\[2pt]
+\textbf{Orbital Motion:} 
+\[
+\frac{d^2u}{d\theta^2}+u=-\frac{m}{L^2}\frac{dV}{du},
+\]
+\[
+r=\frac{a(1-e^2)}{1+e\cos\theta},
+\quad
+r(\theta)=\frac{r_0}{1+\epsilon\cos(\theta-\theta_0)}
+=\frac{a(1-\epsilon^2)}{1+\epsilon\cos(\theta-\theta_0)},
+\]
+\[
+r_0=\frac{p_\theta^2}{\mu Gm_1m_2}=a(1-\epsilon^2),
+\]
+\[
+r_{\min}=\frac{r_0}{1+\epsilon}=a(1-\varepsilon),\quad
+r_{\max}=\frac{r_0}{1-\epsilon}=a(1+\varepsilon),
+\]
+\[
+a=\frac{r_{\max}+r_{\min}}{2},\quad b=a\sqrt{1-\varepsilon^2},
+\]
+\[
+\varepsilon=\sqrt{1+\frac{2E\,p_\theta^2}{G^2\mu M_1^2M_2^2}}
+=\sqrt{1-\left(\frac{b}{a}\right)^2}.
+\]
+\[
+E=\frac{1}{2}mv^2-\frac{GMm}{r},\quad
+\dot{r}=\sqrt{\frac{2}{\mu}\left(E-V(r)-\frac{\ell^2}{2\mu r^2}\right)},
+\]
+\[
+L=mr^2\dot{\theta}=\text{const.}
+\]
+
+\textbf{Kepler Two-Body:} 
+\[
+L=\frac{\mu}{2}\left(\dot{r}^2+r^2\dot{\phi}^2\right)-V(r),
+\]
+\[
+\mu\ddot{r}=-\frac{dV}{dr}+\frac{p_\theta^2}{\mu r^3},\quad
+\mu=\frac{m_1m_2}{m_1+m_2}.
+\]
+In COM frame:
+\[
+L=\frac{\mu\dot{r}^2}{2}-V(r),
+\quad
+L=\mathbf{r}\times\mu\dot{\mathbf{r}}=\text{const},
+\]
+\[
+P_\phi=\frac{\partial L}{\partial\dot{\phi}}=\mu r^2\dot{\phi}=\text{const},
+\]
+\[
+\mu\ddot{\mathbf{r}}=-\frac{GM\mu}{r^2}\hat{\mathbf{r}}
+=-\frac{\partial V_{\text{eff}}}{\partial r},
+\]
+\[
+V_{\text{eff}}(r)=V(r)+\frac{p_\theta^2}{2\mu r^2}
+=-\frac{GM_1M_2}{r}+\frac{\ell^2}{2\mu r^2},
+\]
+\[
+E=\frac{1}{2}\mu\dot{r}^2+V_{\text{eff}}(r),
+\]
+\[
+\Delta\phi=2\int_{r_1}^{r_2}\frac{L\,dr}{r^2\sqrt{2\mu(E-V_{\text{eff}}(r))}},
+\]
+\[
+\Delta\theta=2\int_{r_{\min}}^{\infty}\frac{l/r^2}{\sqrt{2\mu\left(E-V(r)-\frac{l^2}{2\mu r^2}\right)}}\,dr.
+\]
+
+\textbf{Laplace-Runge-Lenz:} 
+\[
+\mathbf{A}=\mathbf{p}\times\mathbf{L}-mk\,\hat{\mathbf{r}}.
+\]
+
+\textbf{Orbit Types (Table):}
+\begin{center}
+\begin{tabular}{c c l}
+\toprule
+Orbit & Condition & Key Eq.\\[2pt]
+\midrule
+Circ. & \(E=E_{\min},\,\epsilon=0\) & \(r_0=\dfrac{L^2}{\mu G m_1m_2}\)\\[4pt]
+Ellip. & \(E_{\min}<E<0,\,0<\epsilon<1\) & \(r=\dfrac{Gm_1m_2}{2E}\Bigl(1\pm\sqrt{1+\frac{2EL^2}{\mu (Gm_1m_2)^2}}\Bigr)\)\\[4pt]
+Parab. & \(E=0,\,\epsilon=1\) & \(r_{\text{par}}=\dfrac{L^2}{2\mu Gm_1m_2}\)\\[4pt]
+Hyp. & \(E>0,\,\epsilon>1\) & \(r_{\text{hyp}}=\dfrac{Gm_1m_2}{2E}(1+\epsilon)\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%----------------------- V. Rigid Body \& Scattering -----------------------
+\textbf{V. Rigid Body \& Scattering}\\[2pt]
+\textbf{Rigid Body:} 
+\[
+\mathbf{R}_{CM}=\frac{1}{M}\sum_i m_i\mathbf{r}_i,
+\quad I_{ij}=\sum_k m_k\left(r_k^2\delta_{ij}-x_{k_i}x_{k_j}\right),
+\quad I=I_C+Md^2.
+\]
+\[
+\begin{cases}
+I_1\dot{\omega}_1+(I_3-I_2)\omega_2\omega_3=\tau_1,\\[2mm]
+I_2\dot{\omega}_2+(I_1-I_3)\omega_3\omega_1=\tau_2,\\[2mm]
+I_3\dot{\omega}_3+(I_2-I_1)\omega_1\omega_2=\tau_3.
+\end{cases}
+\]
+
+\textbf{Moments of Inertia:}\\[2pt]
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{l c}
+\toprule
+\textbf{Object} & \textbf{\(I\)} \\
+\midrule
+Solid Sphere & \(\frac{2}{5}MR^2\)\\[2mm]
+Hollow Sphere & \(\frac{2}{3}MR^2\)\\[2mm]
+Solid Cylinder/Thin Disk & \(\frac{1}{2}MR^2\)\\[2mm]
+Thin Rod (center) & \(\frac{1}{12}ML^2\)\\[2mm]
+Rod (end) & \(\frac{1}{3}ML^2\)\\[2mm]
+Rectangle (center) & \(\frac{1}{12}M(a^2+b^2)\)\\[2mm]
+Ring (center) & \(MR^2\)\\[2mm]
+Solid Cone (sym. axis) & \(\frac{3}{10}MR^2\)\\[2mm]
+Cube (center) & \(\frac{1}{6}Ma^2\)\\
+\bottomrule
+\end{tabular}
+
+\[
+T=T_{CM}+T_{Rot}=\frac{MV_{CM}^2}{2}+\frac{I_{CM}\omega^2}{2}.
+\]
+
+\textbf{Scattering:} 
+For impact parameter \(\rho\), angle \(\theta\), asymptotic speed \(v_\infty\) and reduced mass \(\mu\):
+\[
+\frac{d\sigma}{d\Omega}=\frac{\rho(\theta)}{\sin\theta}\left|\frac{d\rho}{d\theta}\right|,
+\]
+\[
+\sigma_T=2\pi\int_0^\pi \rho(\theta)\left|\frac{d\rho}{d\theta}\right|d\theta.
+\]
+With 
+\[
+E=\frac{1}{2}\mu v_\infty^2,\quad \ell=\mu\rho v_\infty,
+\]
+and if \(r_{\min}\) is the closest approach,
+\[
+\rho^2=r_{\min}^2\Bigl(1-\frac{V(r_{\min})}{E}\Bigr).
+\]
+\[
+\theta\approx -\frac{2b}{\mu v_\infty^2}\int_b^\infty\frac{V'(r)\,dr}{\sqrt{r^2-b^2}},\quad
+b=\frac{L}{\mu v_\infty}.
+\]
+
+%----------------------- VI. Dimensional Analysis & Scaling -----------------------
+\textbf{VI. Dim. Analysis \& Scaling}\\[2pt]
+\textbf{Legendre Transform:} 
+\[
+\frac{df}{dx}=f'(x)=s(x)
+\]
+\[
+g(s)=-s\cdot x(s)+f(x(s)).
+\]
+\textbf{Inverse Transform:} 
+\[
+V(x)=g(s(x))+f(x).
+\]
+
+\textbf{Homogeneity:} 
+\[
+f(ax)=a^kf(x),\quad E_{\text{Kin}}(a\vec{v})=\frac{1}{2}ma^2v^2,
+\quad V(r)=g\,r^k.
+\]
+\[
+\nabla f(x)\cdot x=kf(x),
+\]
+or
+\[
+x\cdot\frac{\partial f(x)}{\partial x}=kf(x).
+\]
+
+\textbf{Virial Theorem:} 
+\[
+2\langle T\rangle+\langle V\rangle=0,\quad 2<T>=k_{deg}\langle V\rangle.
+\]
+
+\textbf{Scaling:} 
+\[
+x\to\alpha x,\quad t\to\beta t,\quad v\to\frac{\alpha}{\beta}v,
+\]
+\[
+\tilde{\mathcal{L}}=\Bigl(\frac{\alpha}{\beta}\Bigr)^2T-\alpha^kV,\quad
+\Bigl(\frac{\alpha}{\beta}\Bigr)^2=\alpha^k\Rightarrow\beta=\alpha^{1-\frac{k}{2}},
+\]
+\[
+\frac{v'}{v}=\Bigl(\frac{l'}{l}\Bigr)^{\frac{k}{2}},\quad
+\frac{E'}{E}=\Bigl(\frac{l'}{l}\Bigr)^k,\quad
+\Bigl(\frac{l'}{l}\Bigr)^{1-\frac{k}{2}}=\frac{t'}{t}.
+\]
+
+\textbf{Buckingham \(\Pi\) Thm:} 
+\[
+f(x_1,\ldots,x_n)=0\Rightarrow f(\Pi_1,\ldots,\Pi_{n-r})=0,
+\]
+\[
+\tau\sim d^{1-\frac{k}{2}},\quad
+v\sim d^{k/2},\quad
+E\sim d^k,\quad
+L\sim d^{1+\frac{k}{2}}.
+\]
+
+%----------------------- VII. Math Tools \& Series -----------------------
+\textbf{VII. Math Tools \& Series}\\[2pt]
+\textbf{Elliptic Coord.:} 
+\[
+x=ar\cos\theta,\quad y=br\sin\theta,\quad dA=abr\,dr\,d\theta,\quad \int_0^{2\pi}\int_0^1dA.
+\]
+
+\textbf{Binet's Eq.:} 
+\[
+u''+u=-\frac{\mu}{p_\theta^2}\frac{1}{u^2}F\Bigl(\frac{1}{u}\Bigr),
+\]
+with \(u=\frac{1}{r}\). For 
+\[
+F(r)=-\frac{k}{r^2},
+\]
+\[
+\frac{d^2u}{d\theta^2}+u=\frac{k}{mh^2},
+\]
+general solution:
+\[
+u(\theta)=\frac{k}{mh^2}+C\cos(\theta-\theta_0).
+\]
+For gravitation:
+\[
+u''+u=\frac{\mu Gm_1m_2}{p_\theta^2},\quad
+r(\theta)=\frac{r_0}{1+e\cos(\theta-\theta_0)},\quad
+r_0=\frac{p_\theta^2}{\mu Gm_1m_2}.
+\]
+
+\textbf{Vec. \& Tensor Calc.:} 
+\[
+\mathbf{a}\cdot\mathbf{b}=a_ib_i,\quad
+(\mathbf{a}\times\mathbf{b})_i=\epsilon_{ijk}a_jb_k,\quad
+(\nabla\times\mathbf{b})_i=\epsilon_{ijk}\partial_jb_k,
+\]
+\[
+(AB)_{ij}=A_{ik}B_{kj},\quad
+v_i\frac{1}{2}m_{jk}v_jv_k=m_{ik}v_k.
+\]
+
+\textbf{Index Identity:} 
+\[
+\epsilon_{ijk}\epsilon_{ilm}=\delta_{jl}\delta_{km}-\delta_{jm}\delta_{kl}.
+\]
+
+\textbf{Levi-Civita:} 
+\[
+\epsilon_{123}=1,\ \epsilon_{213}=-1,\ \epsilon_{221}=0,\quad
+\epsilon_{ijk}=\epsilon_{jki}=-\epsilon_{jik},
+\]
+\[
+\hat{e}_i\times\hat{e}_j=\epsilon_{ijk}\hat{e}_k.
+\]
+
+\textbf{Complete Deriv.:} 
+\[
+\frac{dX}{dt}=\frac{\partial X}{\partial t}+\frac{\partial X}{\partial q}\frac{dq}{dt},
+\]
+\[
+\mathbf{r}=r(\cos\varphi,\sin\varphi)=r\hat{\mathbf{r}},\quad
+\dot{\mathbf{r}}=\dot{r}\hat{r}+r\dot{\theta}\hat{\theta},
+\]
+\[
+\ddot{\mathbf{r}}=(\ddot{r}-r\dot{\theta}^2)\hat{r}+(2\dot{r}\dot{\theta}+r\ddot{\theta})\hat{\theta}.
+\]
+
+\textbf{Rotations:}
+\[
+R_x(\gamma)=\begin{pmatrix} 1&0&0\\0&\cos\gamma&-\sin\gamma\\0&\sin\gamma&\cos\gamma \end{pmatrix},
+\]
+\[
+R_y(\beta)=\begin{pmatrix}\cos\beta&0&\sin\beta\\0&1&0\\-\sin\beta&0&\cos\beta\end{pmatrix},
+\]
+\[
+R_z(\alpha)=\begin{pmatrix}\cos\alpha&-\sin\alpha&0\\\sin\alpha&\cos\alpha&0\\0&0&1\end{pmatrix},
+\]
+\[
+R(\alpha,\beta,\gamma)=R_z(\alpha)R_y(\beta)R_x(\gamma).
+\]
+
+\textbf{Ang. Vel. (Matrix):}
+\[
+\Omega=\begin{pmatrix}\omega_1\\\omega_2\\\omega_3\end{pmatrix}
+=\begin{pmatrix}\dot{\phi}\sin\theta\sin\psi+\dot{\theta}\cos\psi\\ \dot{\phi}\sin\theta\cos\psi+\dot{\theta}\sin\psi\\ \dot{\psi}+\dot{\phi}\cos\theta\end{pmatrix}.
+\]
+
+\textbf{Parametric Resonance:}
+\[
+\ddot{x}+\omega(t)x=0,\quad \omega(t)=\omega(t+T)\Rightarrow x^*(t)=x(t+T).
+\]
+\[
+x_i(t+nT)=\mu_i^n\,x_i=\sum_j A_{ij}\tilde{x}(t),\quad
+x_i(t)=\mu_i^{t/T}\Pi_i(t),
+\]
+\[
+|\mu_1|\neq|\mu_2|\Rightarrow\textbf{Parametric Resonance},\quad
+\mu_1\mu_2=1\Rightarrow x_2x_1-x_1x_2=\text{const}.
+\]
+
+\textbf{Taylor Series:}
+\[
+(1+x)^\alpha=1+\alpha x+\frac{\alpha(\alpha-1)}{2!}\,x^2+\cdots,
+\]
+\[
+f(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\cdots,
+\]
+\[
+\sin x=x-\frac{x^3}{3!}+\frac{x^5}{5!}+\cdots,\quad
+\cos x=1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots,
+\]
+\[
+\frac{1}{1-x}=1+x+x^2+x^3+\cdots.
+\]
+
+\end{multicols}
+\end{document}

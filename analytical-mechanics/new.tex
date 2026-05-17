@@ -1,0 +1,82 @@
+\textbf{Parametric Resonance}
+The system satisfies the equation of motion:
+\[
+\ddot{x} + \omega (t) x = 0
+\]
+where $\omega (t)$ is a periodic function with period $T$.
+
+\textbf{Conditions for Parametric Resonance}
+We substitute the solution space of the motion and obtain a set of solutions. Due to the periodicity of the equation, we obtain a solution in the form:
+\[
+x_i (t + nT) = \mu_i^n x_i
+\]
+where the solution can be expressed as a product of periodic functions. This leads to the condition:
+\[
+\mu_1 \mu_2 = 1 \Rightarrow x_2 x_1 - x_1 x_2 = \text{const}
+\]
+Thus, parametric resonance occurs if $\mu_1 \neq 1$.
+
+\textbf{Growth of Perturbation for Mathieu's Equation}
+In general, when does the perturbation $\omega (t)$ grow?  
+The approximate solution is given by:
+\[
+\omega_0^2 (1 + \varepsilon \cos \gamma t)
+\]
+For small perturbations, we approximate $\gamma$ as:
+\[
+\gamma = \omega_0 + \delta
+\]
+where the solution takes the form:
+\[
+a(t) \cos \left(\omega_0 + \frac{\delta}{2} \right)t + b(t) \sin \left(\omega_0 + \frac{\delta}{2} \right)t
+\]
+where $a, b$ are evaluated at points of minimal perturbation. Under certain conditions, we obtain the constraint:
+\[
+|\delta| < \frac{1}{2} \omega_0^2 \varepsilon \frac{\epsilon^2}{32} \omega_0^2.
+\]
+
+\subsection*{Trick for Finding $\eta$}
+We start with the perturbative equation in the form:
+\[
+\dot{\phi} = -\frac{\partial V}{\partial \phi} + f (\phi, t)
+\]
+where $f_1$ represents the weak force on the motion. We solve for the slow-time solution:
+\[
+\phi = \Phi + \eta
+\]
+where the effective potential is given by:
+\[
+V_{\text{eff}} (\Phi) = V (\Phi) + \frac{1}{2} \langle \eta^2 \rangle.
+\]
+
+\subsection*{Scattering - Differential Cross Section}
+The inclusion of the solid angle for radial coordinates is given by:
+\[
+d\Omega = \frac{dS}{r^2} = \sin \theta d\theta d\varphi
+\]
+which integrates as:
+\[
+d\Omega = 2\pi \sin \theta d\theta.
+\]
+
+\subsection*{Scattering Cross Section}
+The scattered area distribution in terms of the solid angle is given by:
+\[
+\frac{\partial \sigma}{\partial \Omega} = \frac{\rho (\theta)}{\sin \theta} \left| \frac{d\rho}{d\theta} \right|
+\]
+
+\subsection*{Total Cross Section}
+\[
+\sigma_T = \int \frac{d\sigma}{d\Omega} d\Omega = 2\pi \int_0^\pi \rho (\theta) \left| \frac{d\rho}{d\theta} \right| d\theta.
+\]
+
+\subsection*{Central Potential}
+We find that the total energy is:
+\[
+E = \frac{1}{2} \mu \omega_0^2 \rho^2
+\]
+which leads to the relation:
+\[
+\rho^2 \left(1 - \frac{V (r_{\min})}{E} \right) = \rho^2.
+\]
+Thus, we establish the relation between $\theta$ in the central potential.

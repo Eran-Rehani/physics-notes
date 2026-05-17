@@ -1,0 +1,133 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+
+\title{Fourier Transform Solution for RLC Circuit}
+\author{}
+\date{}
+\maketitle
+
+\section*{Introduction}
+This document provides the Fourier transform solution for the RLC circuit with a driven AC current. We derive the governing equations and analyze the circuit in the frequency domain using the Fourier transform technique.
+
+\section*{Circuit Description}
+Consider a series RLC circuit driven by an AC voltage source:
+\[
+V_{\text{in}}(t) = V_0 e^{i\omega t}.
+\]
+The components of the circuit are:
+\begin{itemize}
+    \item Resistor: \(R\),
+    \item Inductor: \(L\),
+    \item Capacitor: \(C\).
+\end{itemize}
+
+The current through the circuit is denoted by \(I(t)\).
+
+\section*{Governing Equation}
+Applying Kirchhoff's Voltage Law (KVL):
+\[
+L \frac{d^2q}{dt^2} + R \frac{dq}{dt} + \frac{q}{C} = V_{\text{in}}(t).
+\]
+Here, \(q(t)\) is the charge on the capacitor and \(I(t) = \frac{dq}{dt}\) is the current. Substituting \(I(t)\):
+\[
+L \frac{dI}{dt} + R I + \frac{1}{C} \int I \, dt = V_{\text{in}}(t).
+\]
+
+\section*{Homogeneous Solution}
+For the homogeneous equation (when \(V_{\text{in}}(t) = 0\)):
+\[
+L \frac{d^2q}{dt^2} + R \frac{dq}{dt} + \frac{q}{C} = 0.
+\]
+Substituting \(I(t) = \frac{dq}{dt}\), we get:
+\[
+L \frac{d^2I}{dt^2} + R \frac{dI}{dt} + \frac{1}{C} I = 0.
+\]
+This is a second-order linear homogeneous differential equation. The characteristic equation is:
+\[
+L\lambda^2 + R\lambda + \frac{1}{C} = 0.
+\]
+The roots of this equation are:
+\[
+\lambda = \frac{-R \pm \sqrt{R^2 - 4\frac{L}{C}}}{2L}.
+\]
+The solution depends on the discriminant \(\Delta = R^2 - 4\frac{L}{C}\):
+\begin{itemize}
+    \item \(\Delta > 0\) (Overdamped): \(I(t) = A e^{\lambda_1 t} + B e^{\lambda_2 t}\), where \(\lambda_1\) and \(\lambda_2\) are real roots.
+    \item \(\Delta = 0\) (Critically Damped): \(I(t) = (A + Bt)e^{\lambda t}\), where \(\lambda = -\frac{R}{2L}\).
+    \item \(\Delta < 0\) (Underdamped): \(I(t) = e^{-\alpha t}(A \cos(\omega_d t) + B \sin(\omega_d t))\), where \(\alpha = \frac{R}{2L}\) and \(\omega_d = \sqrt{\frac{1}{LC} - \frac{R^2}{4L^2}}\).
+\end{itemize}
+
+\section*{Fourier Transform Solution for Driven Circuit}
+Taking the Fourier transform of both sides of the governing equation:
+\[
+\mathcal{F}\left[L \frac{dI}{dt} + R I + \frac{1}{C} \int I \, dt \right] = \mathcal{F}\left[V_{\text{in}}(t)\right].
+\]
+Using the properties of the Fourier transform:
+\begin{itemize}
+    \item \(\mathcal{F}\left[\frac{dI}{dt}\right] = i\omega \hat{I}(\omega)\),
+    \item \(\mathcal{F}\left[\int I \, dt\right] = \frac{\hat{I}(\omega)}{i\omega}\),
+    \item \(\mathcal{F}\left[I(t)\right] = \hat{I}(\omega)\),
+\end{itemize}
+where \(\hat{I}(\omega)\) is the Fourier transform of \(I(t)\).
+
+The equation in the frequency domain becomes:
+\[
+\left(L i\omega \hat{I}(\omega) + R \hat{I}(\omega) + \frac{1}{C} \frac{\hat{I}(\omega)}{i\omega}\right) = \hat{V}_{\text{in}}(\omega).
+\]
+
+Simplify:
+\[
+\hat{I}(\omega) \left(R + i\omega L - \frac{i}{\omega C}\right) = \hat{V}_{\text{in}}(\omega).
+\]
+
+\section*{Solution in Frequency Domain}
+The impedance \(Z(\omega)\) of the circuit is given by:
+\[
+Z(\omega) = R + i\omega L - \frac{i}{\omega C}.
+\]
+Thus, the Fourier transform of the current is:
+\[
+\hat{I}(\omega) = \frac{\hat{V}_{\text{in}}(\omega)}{Z(\omega)}.
+\]
+For a sinusoidal input voltage \(V_{\text{in}}(t) = V_0 e^{i\omega t}\), we have:
+\[
+\hat{V}_{\text{in}}(\omega) = V_0 \delta(\omega - \omega_0).
+\]
+Substituting:
+\[
+\hat{I}(\omega) = \frac{V_0 \delta(\omega - \omega_0)}{R + i\omega L - \frac{i}{\omega C}}.
+\]
+
+\section*{Solution in Time Domain}
+The current in the time domain is obtained by taking the inverse Fourier transform:
+\[
+I(t) = \mathcal{F}^{-1}\left[\hat{I}(\omega)\right].
+\]
+Substitute \(\hat{I}(\omega)\):
+\[
+I(t) = \mathcal{F}^{-1}\left[\frac{V_0 \delta(\omega - \omega_0)}{R + i\omega L - \frac{i}{\omega C}}\right].
+\]
+Since \(\delta(\omega - \omega_0)\) selects the frequency \(\omega_0\):
+\[
+I(t) = \frac{V_0}{Z(\omega_0)} e^{i\omega_0 t}.
+\]
+
+The magnitude of the current is:
+\[
+|I(t)| = \frac{V_0}{\sqrt{R^2 + \left(\omega_0 L - \frac{1}{\omega_0 C}\right)^2}}.
+\]
+The phase shift \(\phi\) is:
+\[
+\phi = \tan^{-1}\left(\frac{\omega_0 L - \frac{1}{\omega_0 C}}{R}\right).
+\]
+Thus, the time-domain current is:
+\[
+I(t) = \frac{V_0}{\sqrt{R^2 + \left(\omega_0 L - \frac{1}{\omega_0 C}\right)^2}} \cos(\omega_0 t + \phi).
+\]
+
+\section*{Conclusion}
+Using the Fourier transform, we derived the current \(I(t)\) for a driven RLC circuit. This approach simplifies the analysis by handling the problem algebraically in the frequency domain, and the inverse Fourier transform retrieves the time-domain solution. Additionally, the homogeneous solution highlights the natural behavior of the circuit in the absence of an external driving force.
+
+\end{document}

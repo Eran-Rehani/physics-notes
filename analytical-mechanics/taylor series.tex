@@ -1,0 +1,176 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\begin{document}
+
+\section*{Common Taylor (Maclaurin) Expansions}
+
+\textbf{1. General Taylor Series about }\(x=a\):
+
+\[
+f(x) = f(a)
+  + f'(a)\,(x - a)
+  + \frac{f''(a)}{2!}\,(x - a)^2
+  + \dots
+  + \frac{f^{(n)}(a)}{n!}\,(x - a)^n
+  + \cdots
+\]
+
+\noindent
+\textbf{Maclaurin series} is the special case \(a=0\):
+
+\[
+f(x)
+ = f(0)
+ + f'(0)\,x
+ + \frac{f''(0)}{2!}\,x^2
+ + \cdots
+\]
+
+\bigskip
+\textbf{2. Exponential Function:}
+
+\[
+e^x
+ = 1
+ + x
+ + \frac{x^2}{2!}
+ + \frac{x^3}{3!}
+ + \cdots
+\]
+
+\bigskip
+\textbf{3. Sine Function:}
+
+\[
+\sin x
+ = x
+ - \frac{x^3}{3!}
+ + \frac{x^5}{5!}
+ - \frac{x^7}{7!}
+ + \cdots
+\]
+
+\bigskip
+\textbf{4. Cosine Function:}
+
+\[
+\cos x
+ = 1
+ - \frac{x^2}{2!}
+ + \frac{x^4}{4!}
+ - \frac{x^6}{6!}
+ + \cdots
+\]
+
+\bigskip
+\textbf{5. Geometric Series (for \(|x|<1\)):}
+
+\[
+\frac{1}{1 - x}
+ = 1
+ + x
+ + x^2
+ + x^3
+ + \cdots
+\]
+
+\bigskip
+\textbf{6. Logarithm:} For \(|x|<1\),
+
+\[
+\ln(1 + x)
+ = x
+ - \frac{x^2}{2}
+ + \frac{x^3}{3}
+ - \frac{x^4}{4}
+ + \cdots
+\]
+
+\bigskip
+\textbf{7. Binomial Expansion:} For any real \(\alpha\) and \(|x|<1\),
+
+\[
+(1 + x)^\alpha
+ = 1
+ + \alpha x
+ + \frac{\alpha(\alpha-1)}{2!}\,x^2
+ + \frac{\alpha(\alpha-1)(\alpha-2)}{3!}\,x^3
+ + \cdots
+\]
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Second-Order Taylor Expansions for Common Potentials}
+
+\subsection*{1. Gravitational Potential (Point Mass)}
+\[
+V(x,y) = -\frac{GM}{\sqrt{x^2 + y^2}}
+\]
+
+\[
+V(x,y) \approx -\frac{GM}{\sqrt{a^2 + b^2}} + \frac{GM}{(a^2 + b^2)^{3/2}} \left[ a(x-a) + b(y-b) \right]
+\]
+
+\[
++ \frac{GM}{2(a^2 + b^2)^{5/2}} \left[ (3b^2-a^2)(x-a)^2 - 4ab(x-a)(y-b) + (3a^2-b^2)(y-b)^2 \right]
+\]
+
+\subsection*{2. Electrostatic Potential (Point Charge)}
+\[
+V(x,y) = \frac{kq}{\sqrt{x^2 + y^2}}
+\]
+
+\[
+V(x,y) \approx \frac{kq}{\sqrt{a^2 + b^2}} - \frac{kq}{(a^2 + b^2)^{3/2}} \left[ a(x-a) + b(y-b) \right]
+\]
+
+\[
++ \frac{kq}{2(a^2 + b^2)^{5/2}} \left[ (3b^2-a^2)(x-a)^2 - 4ab(x-a)(y-b) + (3a^2-b^2)(y-b)^2 \right]
+\]
+
+\subsection*{3. Harmonic Potential}
+\[
+V(x,y) = \frac{1}{2} k (x^2 + y^2)
+\]
+
+\[
+V(x,y) \approx \frac{1}{2} k (a^2 + b^2) + k a (x-a) + k b (y-b) + \frac{k}{2} \left[(x-a)^2 + (y-b)^2\right]
+\]
+
+\subsection*{4. Coulomb + Harmonic Potential}
+\[
+V(x,y) = \frac{k}{2} (x^2 + y^2) + \frac{q}{\sqrt{x^2 + y^2}}
+\]
+
+\[
+V(x,y) \approx \frac{k}{2} (a^2 + b^2) + \frac{q}{\sqrt{a^2 + b^2}} + k a (x-a) + k b (y-b) - \frac{q}{(a^2 + b^2)^{3/2}} (a(x-a) + b(y-b))
+\]
+
+\[
++ \frac{k}{2} \left[(x-a)^2 + (y-b)^2\right] + \frac{q}{2(a^2 + b^2)^{5/2}} \left[(3b^2-a^2)(x-a)^2 - 4ab(x-a)(y-b) + (3a^2-b^2)(y-b)^2\right]
+\]
+\textbf{1. Harmonic Potential:} \( V(x) = \frac{1}{2} k x^2 \) \\[-2pt]
+\[
+V(x) \approx V(x_0) + V'(x_0)(x-x_0) + \frac{1}{2}V''(x_0)(x-x_0)^2
+\]
+\[
+= \frac{1}{2} k x_0^2 + k x_0 (x - x_0) + \frac{1}{2} k (x-x_0)^2
+\]
+
+\textbf{2. Gravitational Potential (Near Surface):} \( V(h) = mg h \) \\[-2pt]
+\[
+V(h) \approx mg h_0 + mg (h-h_0) + 0
+\]
+
+\textbf{3. Coulomb Potential:} \( V(r) = -\frac{k}{r} \) \\[-2pt]
+\[
+V(r) \approx -\frac{k}{r_0} + \frac{k}{r_0^2} (r - r_0) - \frac{k}{r_0^3} \frac{(r - r_0)^2}{2}
+\]
+
+\end{document}
+
+
+\end{document}

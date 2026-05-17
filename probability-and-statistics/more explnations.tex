@@ -1,0 +1,54 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, booktabs}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{hyperref}
+
+\title{Summary of Key Probability Distributions and Statistical Formulas}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{General Probability and Statistics Formulas}
+
+\subsection{Conditional Probability}
+The probability of an event $A$ given another event $B$ has occurred is given by:
+\begin{align*}
+    P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \quad \text{if } P(B) > 0.
+\end{align*}
+\paragraph{Example:} Suppose a fair six-sided die is rolled. The probability of rolling an even number given that the number is greater than 2 is:
+\begin{align*}
+    P(E \mid G) = \frac{P(E \cap G)}{P(G)} = \frac{\frac{2}{6}}{\frac{4}{6}} = \frac{1}{2}.
+\end{align*}
+
+\subsection{Central Limit Theorem (CLT)}
+The CLT states that for a sequence of i.i.d. random variables $X_1, X_2, ..., X_n$ with mean $\mu$ and variance $\sigma^2$, their normalized sum converges in distribution to a normal distribution:
+\begin{align*}
+    \frac{\sum_{i=1}^{n} X_i - n\mu}{\sigma \sqrt{n}} \to N(0,1) \quad \text{as } n \to \infty.
+\end{align*}
+
+\subsubsection{When to Use CLT}
+\begin{itemize}
+    \item \textbf{For Normal Distributions:} If $X_i \sim N(\mu, \sigma^2)$, then the sample mean $\bar{X}$ also follows a normal distribution exactly for any $n$. The CLT is unnecessary in this case.
+    \item \textbf{For Other Distributions:} If $X_i$ is not normally distributed but has finite variance, the CLT ensures that the sum (or mean) of a sufficiently large number of independent samples is approximately normally distributed.
+    \item \textbf{For Poisson Distributions:} If $X_i \sim \text{Poisson}(\lambda)$, then for large $n$, the sum $S_n = X_1 + X_2 + ... + X_n$ is approximately normal:
+    \begin{align*}
+        S_n \approx N(n\lambda, n\lambda).
+    \end{align*}
+\end{itemize}
+
+\paragraph{Example:} Suppose we roll a fair die 1000 times and compute the mean outcome. Each roll has expected value $E[X] = 3.5$ and variance $\operatorname{Var}(X) = \frac{35}{12}$. By the CLT,
+\begin{align*}
+    \bar{X} \approx N\left(3.5, \frac{35}{12000}\right).
+\end{align*}
+Thus, for large $n$, we can approximate probabilities of sample means using the normal distribution.
+
+\section{Conclusion}
+This document summarizes key probability distributions, expected value and variance properties, covariance and correlation, and fundamental statistical estimation techniques. These principles are crucial in probability theory and data analysis.
+
+\end{document}

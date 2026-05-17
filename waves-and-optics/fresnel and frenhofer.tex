@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{physics}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\begin{document}
+
+\section{Fraunhofer Diffraction Example}
+
+\subsection{Rectangular Aperture Transmission Function}
+\begin{equation}
+    T(x,y) = \operatorname{rect} \left(\frac{x}{2w}\right) \operatorname{rect} \left(\frac{y}{2h}\right).
+\end{equation}
+
+\subsection{Fraunhofer Approximation}
+The amplitude immediately after the aperture at \( (x',y') \) is given by \( A \). At a distance \( z \), the far-field diffraction pattern is:
+
+\begin{equation}
+    U(x,y,z) = \frac{k}{iz} e^{ik_0 z} e^{\frac{ik_0}{2z} (x^2 + y^2)}
+    \cdot \frac{1}{2\pi} \iint_{-\infty}^{\infty} U(x', y', z=0) e^{-i \frac{k_0}{z} x x'} e^{-i \frac{k_0}{z} y y'} dx' dy'.
+\end{equation}
+
+Since the aperture is limited to \( x' \in [-w, w] \) and \( y' \in [-h, h] \), we can express the integral as:
+
+\begin{equation}
+    U(x,y,z) = \frac{k}{iz} e^{ik_0 z} e^{\frac{ik_0}{2z} (x^2 + y^2)}
+    \cdot \frac{1}{2\pi} A \int_{x'=-w}^{w} e^{-i \frac{k_0}{z} x x'} dx'
+    \int_{y'=-h}^{h} e^{-i \frac{k_0}{z} y y'} dy'.
+\end{equation}
+
+\subsection{Using the Identity}
+Using the identity:
+\begin{equation}
+    \int e^{-i\alpha x} dx = \frac{1}{-i\alpha} \left( e^{-i\alpha x} - e^{i\alpha x} \right) = \frac{2\sin(\alpha x)}{\alpha},
+\end{equation}
+we evaluate the integrals:
+
+\begin{equation}
+    U(x,y,z) = \frac{k_0}{iz} e^{ik_0 z} e^{\frac{ik_0}{2z} (x^2+y^2)}
+    \cdot \frac{1}{2\pi} A \left( \frac{2\sin\left(\frac{k_0 w x}{z}\right)}{\frac{k_0 x}{z}} \right)
+    \left( \frac{2\sin\left(\frac{k_0 h y}{z}\right)}{\frac{k_0 y}{z}} \right).
+\end{equation}
+
+
+
+\section{Double-Slit Interference}
+
+\subsection{Aperture Function}
+For two slits of width \( 2w \), separated by a distance \( d \), the transmission function is modeled as:
+\begin{equation}
+    T(x) = \operatorname{rect} \left(\frac{x - d/2}{2w} \right) + \operatorname{rect} \left(\frac{x + d/2}{2w} \right).
+\end{equation}
+
+\subsection{Using Fourier Transforms}
+The intensity of the diffraction pattern is proportional to the squared magnitude of the Fourier transform:
+\begin{equation}
+    I \propto \left| \mathcal{F} \left[ \operatorname{rect} \left(\frac{x - d/2}{2w} \right) + \operatorname{rect} \left(\frac{x + d/2}{2w} \right) \right] \right|^2.
+\end{equation}
+
+\subsection{Evaluating the Fourier Transform}
+Using the Fourier transform properties of the rectangular function:
+\begin{equation}
+    \mathcal{F} \left[ \operatorname{rect} \left( \frac{x}{2w} \right) \right] = \operatorname{sinc} \left(\frac{kx}{z} w\right),
+\end{equation}
+we find that the two slits contribute an additional phase factor due to their displacement:
+\begin{equation}
+    I \propto \left| \left( e^{i k x d / 2z} + e^{-i k x d / 2z} \right) \operatorname{sinc} \left( \frac{kx}{z} w \right) \right|^2.
+\end{equation}
+
+Since \( e^{i\theta} + e^{-i\theta} = 2\cos\theta \), we obtain:
+\begin{equation}
+    I = 4 \cos^2 \left( \frac{kx d}{2z} \right) \operatorname{sinc}^2 \left( \frac{kx}{z} w \right).
+\end{equation}
+
+\subsection{Interference Pattern}
+The resulting pattern consists of:
+\begin{itemize}
+    \item A central \(\operatorname{sinc}^2(x)\) diffraction envelope due to the finite width of each slit.
+    \item Rapid \(\cos^2(x)\) oscillations corresponding to interference from the two slits.
+\end{itemize}
+The resulting intensity pattern follows the behavior shown in the figure below.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{double_slit_diagram.png}
+    \caption{Double-slit diffraction pattern: The envelope follows a \(\operatorname{sinc}^2(x)\) function due to single-slit diffraction, while the fringes oscillate with \(\cos^2(x)\) due to interference.}
+\end{figure}
+
+\end{document}
